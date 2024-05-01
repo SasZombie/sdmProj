@@ -1,5 +1,4 @@
 #include "../include/MedicalEncounter.hpp"
-#include <chrono>
 
 
 EHR::MedicalEncounter::MedicalEncounter(const Doctor &doctor, const HealthIssue &issue)
@@ -38,6 +37,11 @@ void EHR::MedicalEncounter::print() const noexcept
     // }
 
 }
+void EHR::MedicalEncounter::setFinished() noexcept
+{
+    this->finished = true;
+}
+
 void EHR::MedicalEncounter::addHealthIssue(const HealthIssue &issue) noexcept
 {
     this->healthIssues.emplace_back(issue);

@@ -1,6 +1,7 @@
 #include "../include/MainSystem.hpp"
 
 
+
 void EHR::MainSystem::patienVisits(Patient &p, const Doctor &doc) noexcept
 {
     if(this->doctors.find(doc) == this->doctors.end())
@@ -9,7 +10,7 @@ void EHR::MainSystem::patienVisits(Patient &p, const Doctor &doc) noexcept
         return;
     }
 
-    MedicalEncounter newMed;
+    MedicalEncounter newMed{doc};
     p.addMedicalEncounter(newMed);
     
     auto[iter, inserted] = this->patients.insert(p);    
@@ -21,12 +22,34 @@ void EHR::MainSystem::patienVisits(Patient &p, const Doctor &doc) noexcept
     }
 }
 
+bool EHR::MainSystem::checkDoctor(const Doctor &doc) const noexcept
+{
+    for(const auto &d : this->doctors)
+    {
+        if(d == doc)
+            return true;
+    }
+    std::cout << "This doctor isnt part of the system\n";
+    return false;
+}
+
+bool EHR::MainSystem::checkPatient(const Patient &pat) const noexcept
+{
+    for(const auto &p : this->patients)
+    {
+        if(p == pat)
+            return true;
+    }
+    std::cout << "This patient isnt part of the system!\n";
+    return false;
+}
+
 void EHR::MainSystem::addDoctor(const Doctor &doc) noexcept
 {
     this->doctors.insert(doc);
 }
 
-void EHR::MainSystem::healthServiciesPerformed(Patient &patien, const HealthServicies &healthServicies)
+void EHR::MainSystem::healthServiciesPerformed(Patient &patien, const HealthServicies &healthServicies) noexcept
 {
     const std::string desc = healthServicies.getDescritpion();
 
@@ -36,8 +59,12 @@ void EHR::MainSystem::healthServiciesPerformed(Patient &patien, const HealthServ
         patien.addMeasurament(desc);
         break;
     case EHR::HealthServiceType::Refferal :
-        // patien.addDoctor(Doctor{desc}, healthServicies.getEncounter());
+    {
+        MedicalEncounter md = healthServicies.getEncounter();
+        patien.addDoctor(Doctor{desc}, md);
         break;
+
+    }
     case EHR::HealthServiceType::Prescription :
         patien.addPrescription(desc);
         break;
@@ -46,6 +73,28 @@ void EHR::MainSystem::healthServiciesPerformed(Patient &patien, const HealthServ
         std::cerr << "Unreachable!!\n";
         exit(EXIT_FAILURE);
     }
+}
+
+void EHR::MainSystem::signEncounter(const Doctor &doc, size_t pass, const MedicalEncounter &enc) noexcept
+{
+    if(!checkDoctor(doc))
+        return;
+
+    if(doc.getID() != pass)
+    {
+        std::cout << "Incorrect signature\n";
+        return;
+    }
+
+
+    for(auto & encounters : this->activeMedicalEncounters)
+    {
+        if(encounters == enc)
+        {
+            encounters.setFinished();
+        }
+    }
+
 }
 
 void EHR::MainSystem::print() const noexcept

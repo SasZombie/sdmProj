@@ -38,6 +38,12 @@ namespace EHR
         {
             return this->name <=> other.name;
         }
+
+        bool operator==(const Patient& other) const
+        {
+            return this->name == other.name;
+        }
+
         ~Patient() = default;
     };
     

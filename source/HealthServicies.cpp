@@ -1,7 +1,7 @@
 #include "../include/HealthServicies.hpp"
 
 
-EHR::HealthServicies::HealthServicies(const HealthServiceType type, const std::string &desc, const MedicalEncounter &nmed)
+EHR::HealthServicies::HealthServicies(const HealthServiceType type, const std::string &desc, const MedicalEncounter &nmed) 
     : hsType(type), description(desc), med(nmed)
 {
 }
