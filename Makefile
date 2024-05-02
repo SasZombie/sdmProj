@@ -177,6 +177,30 @@ source/Doctor.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/source/Doctor.cpp.s
 .PHONY : source/Doctor.cpp.s
 
+source/HealthIssue.o: source/HealthIssue.cpp.o
+.PHONY : source/HealthIssue.o
+
+# target to build an object file
+source/HealthIssue.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/source/HealthIssue.cpp.o
+.PHONY : source/HealthIssue.cpp.o
+
+source/HealthIssue.i: source/HealthIssue.cpp.i
+.PHONY : source/HealthIssue.i
+
+# target to preprocess a source file
+source/HealthIssue.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/source/HealthIssue.cpp.i
+.PHONY : source/HealthIssue.cpp.i
+
+source/HealthIssue.s: source/HealthIssue.cpp.s
+.PHONY : source/HealthIssue.s
+
+# target to generate assembly for a file
+source/HealthIssue.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/source/HealthIssue.cpp.s
+.PHONY : source/HealthIssue.cpp.s
+
 source/HealthServicies.o: source/HealthServicies.cpp.o
 .PHONY : source/HealthServicies.o
 
@@ -288,6 +312,9 @@ help:
 	@echo "... source/Doctor.o"
 	@echo "... source/Doctor.i"
 	@echo "... source/Doctor.s"
+	@echo "... source/HealthIssue.o"
+	@echo "... source/HealthIssue.i"
+	@echo "... source/HealthIssue.s"
 	@echo "... source/HealthServicies.o"
 	@echo "... source/HealthServicies.i"
 	@echo "... source/HealthServicies.s"

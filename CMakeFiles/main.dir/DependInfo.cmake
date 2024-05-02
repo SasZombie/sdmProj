@@ -10,6 +10,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "/home/saszombie/Coding/sdmProj/main.cpp" "CMakeFiles/main.dir/main.cpp.o" "gcc" "CMakeFiles/main.dir/main.cpp.o.d"
   "/home/saszombie/Coding/sdmProj/source/Doctor.cpp" "CMakeFiles/main.dir/source/Doctor.cpp.o" "gcc" "CMakeFiles/main.dir/source/Doctor.cpp.o.d"
+  "/home/saszombie/Coding/sdmProj/source/HealthIssue.cpp" "CMakeFiles/main.dir/source/HealthIssue.cpp.o" "gcc" "CMakeFiles/main.dir/source/HealthIssue.cpp.o.d"
   "/home/saszombie/Coding/sdmProj/source/HealthServicies.cpp" "CMakeFiles/main.dir/source/HealthServicies.cpp.o" "gcc" "CMakeFiles/main.dir/source/HealthServicies.cpp.o.d"
   "/home/saszombie/Coding/sdmProj/source/MainSystem.cpp" "CMakeFiles/main.dir/source/MainSystem.cpp.o" "gcc" "CMakeFiles/main.dir/source/MainSystem.cpp.o.d"
   "/home/saszombie/Coding/sdmProj/source/MedicalEncounter.cpp" "CMakeFiles/main.dir/source/MedicalEncounter.cpp.o" "gcc" "CMakeFiles/main.dir/source/MedicalEncounter.cpp.o.d"

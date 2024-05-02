@@ -12,7 +12,7 @@ namespace EHR
     class HealthServicies
     {
     private:
-        bool wasCorrect;
+        bool wasCompleted;
         HealthServiceType hsType;
         std::string description;
         MedicalEncounter med;
@@ -22,7 +22,7 @@ namespace EHR
 
         HealthServiceType getType() const noexcept;
         const std::string & getDescritpion() const noexcept;
-        const MedicalEncounter & getEncounter() const noexcept;
+        const MedicalEncounter & getEncounter() const noexcept;       
 
         ~HealthServicies() = default;
     };

@@ -1,5 +1,7 @@
 #pragma once
 #include <vector>
+#include <string>
+#include "Concepts.hpp"
 
 namespace EHR
 {
@@ -25,7 +27,17 @@ namespace EHR
         {
         }
 
+        const std::string & getName() const noexcept;
         
+        auto operator<=>(const HealthIssue& other) const
+        {
+            return this->name <=> other.name;
+        }
+
+        bool operator==(const HealthIssue& other) const
+        {
+            return this->name == other.name;
+        }
 
         ~HealthIssue() = default;
     };   

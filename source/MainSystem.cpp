@@ -1,7 +1,6 @@
 #include "../include/MainSystem.hpp"
 
 
-
 void EHR::MainSystem::patienVisits(Patient &p, const Doctor &doc) noexcept
 {
     if(this->doctors.find(doc) == this->doctors.end())
@@ -12,14 +11,15 @@ void EHR::MainSystem::patienVisits(Patient &p, const Doctor &doc) noexcept
 
     MedicalEncounter newMed{doc};
     p.addMedicalEncounter(newMed);
+    this->activeMedicalEncounters.emplace_back(newMed);
     
-    auto[iter, inserted] = this->patients.insert(p);    
-    
-    if(!inserted)
+    for(const auto & pat : this->patients)
     {
-        this->patients.insert(p);
-        this->patients.erase(iter);
+        if(pat == p)
+            return;
     }
+
+    this->patients.emplace_back(p);
 }
 
 bool EHR::MainSystem::checkDoctor(const Doctor &doc) const noexcept
@@ -44,11 +44,30 @@ bool EHR::MainSystem::checkPatient(const Patient &pat) const noexcept
     return false;
 }
 
+void EHR::MainSystem::deleteFromActive(const MedicalEncounter &med) noexcept
+{
+    auto it = std::find(this->activeMedicalEncounters.begin(), this->activeMedicalEncounters.end(), med);
+    if (it != this->activeMedicalEncounters.end()) {
+        this->activeMedicalEncounters.erase(it);
+    }
+}
 void EHR::MainSystem::addDoctor(const Doctor &doc) noexcept
 {
     this->doctors.insert(doc);
 }
 
+void EHR::MainSystem::deleteMedEnc(const MedicalEncounter &med, Patient &p) noexcept
+{
+    this->deleteFromActive(med);
+    p.addMedicalEncounter(med);
+    
+}
+void EHR::MainSystem::archiveMedEnc(const MedicalEncounter &med, Patient &p) noexcept
+{
+    this->deleteFromActive(med);
+    this->archivedMedicalEncounters.emplace_back(p.getMedEnc());
+    p.addMedicalEncounter(med);
+}
 void EHR::MainSystem::healthServiciesPerformed(Patient &patien, const HealthServicies &healthServicies) noexcept
 {
     const std::string desc = healthServicies.getDescritpion();
@@ -112,5 +131,62 @@ void EHR::MainSystem::print() const noexcept
     {
         p.print();
     }
-    
+
+    std::cout << "\n------------------------------\n";
+
+    std::cout << "All archived Encounters are: \n";
+    for(const auto &p : this->archivedMedicalEncounters)
+    {
+        p.print();
+    }
+
+    std::cout << "\n------------------------------\n";
+
+    std::cout << "All active Encounters are: \n";
+    for(const auto &p : this->activeMedicalEncounters)
+    {
+        p.print();
+    }    
+}
+
+void EHR::MainSystem::printPrescriptions(const std::string& pat) const noexcept
+{
+    if(this->checkPatient(pat))
+    {
+        std::cout << "Cannot find patient with ID " << pat << '\n';
+        return;
+    }
+
+    for(Patient &p : this->patients)
+        if(p == pat)
+        {    
+            for(const auto & prep : p.getPrescriptions())
+            {
+                std::cout << prep.name << ' ' << prep.isCompleted << '\n';
+            }
+
+            std::cout << "Please Specify witch prescriptions to complete\n This action CANNOT be undone\n";
+
+            std::vector<std::string> buff;
+
+            //Insert Gui to add to buffer
+
+            for(const std::string & s : buff)
+            {
+                p.setPrescriptionStatus()
+            }
+        }
+
+}
+void EHR::MainSystem::viewPatientData(const Patient &pat, const Doctor &doc) const noexcept
+{
+    if(pat.getMedEnc().isDoctor(doc))
+        pat.print();
+    else
+        std::cout << "You are not allowed to see this patient's data!\n";
+}
+
+void EHR::MainSystem::viewPatientData(const Patient &pat) const noexcept
+{
+    pat.print();
 }

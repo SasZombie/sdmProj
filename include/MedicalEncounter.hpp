@@ -26,6 +26,7 @@ namespace EHR
 
         void print() const noexcept;
         void setFinished() noexcept;
+        bool isDoctor(const Doctor & doc) const noexcept;
         bool isFinished() const noexcept;
 
         auto operator<=>(const MedicalEncounter& other) const

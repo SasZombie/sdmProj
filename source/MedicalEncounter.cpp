@@ -1,6 +1,7 @@
 #include "../include/MedicalEncounter.hpp"
 
 
+
 EHR::MedicalEncounter::MedicalEncounter(const Doctor &doctor, const HealthIssue &issue)
 {
     this->doctors.insert(doctor);
@@ -40,6 +41,12 @@ void EHR::MedicalEncounter::print() const noexcept
 void EHR::MedicalEncounter::setFinished() noexcept
 {
     this->finished = true;
+}
+
+bool EHR::MedicalEncounter::isDoctor(const Doctor &doc) const noexcept
+{
+    auto it = this->doctors.find(doc);
+    return (it != this->doctors.end());
 }
 
 void EHR::MedicalEncounter::addHealthIssue(const HealthIssue &issue) noexcept

@@ -1,10 +1,10 @@
 #pragma once
 #include <string>
+#include "Concepts.hpp"
 
 namespace EHR
 {
-    template<typename T>
-    concept SomeString = std::convertible_to<T, std::string>;
+
 
     class Doctor
     {
