@@ -1,5 +1,4 @@
 #include "../include/Patient.hpp"
-#include "Patient.hpp"
 
 static const std::unordered_map<std::string, std::vector<std::string>> contraIndications = {
     {"Paracetamol", {"Rubeola", "Medicament2", "Medicament3", "Cancer", "Papanas"}}

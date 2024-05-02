@@ -13,13 +13,13 @@ void EHR::MainSystem::patienVisits(Patient &p, const Doctor &doc) noexcept
     p.addMedicalEncounter(newMed);
     this->activeMedicalEncounters.emplace_back(newMed);
     
-    for(const auto & pat : this->patients)
+    auto[iter, inserted] = this->patients.insert(p);    
+    
+    if(!inserted)
     {
-        if(pat == p)
-            return;
+        this->patients.insert(p);
+        this->patients.erase(iter);
     }
-
-    this->patients.emplace_back(p);
 }
 
 bool EHR::MainSystem::checkDoctor(const Doctor &doc) const noexcept
@@ -149,7 +149,7 @@ void EHR::MainSystem::print() const noexcept
     }    
 }
 
-void EHR::MainSystem::printPrescriptions(const std::string& pat) const noexcept
+void EHR::MainSystem::printPrescriptions(const std::string& pat) noexcept
 {
     if(this->checkPatient(pat))
     {
@@ -157,25 +157,28 @@ void EHR::MainSystem::printPrescriptions(const std::string& pat) const noexcept
         return;
     }
 
-    for(Patient &p : this->patients)
-        if(p == pat)
-        {    
-            for(const auto & prep : p.getPrescriptions())
-            {
-                std::cout << prep.name << ' ' << prep.isCompleted << '\n';
-            }
 
-            std::cout << "Please Specify witch prescriptions to complete\n This action CANNOT be undone\n";
+    auto pres = this->patients.find(pat);
+    for(const auto & prep : pres->getPrescriptions())
+    {
+        std::cout << prep.name << ' ' << prep.isCompleted << '\n';
+    }
 
-            std::vector<std::string> buff;
+    std::cout << "Please Specify witch prescriptions to complete\n This action CANNOT be undone\n";
 
-            //Insert Gui to add to buffer
+    std::vector<std::string> buff;
 
-            for(const std::string & s : buff)
-            {
-                p.setPrescriptionStatus()
-            }
-        }
+    //Insert Gui to add to buffer
+
+    for(const std::string & s : buff)
+    {
+        auto temp = *pres;
+
+        temp.setPrescriptionStatus(Prescription{true, s});
+        this->patients.erase(pres);
+        this->patients.insert(std::move(temp));
+    }
+
 
 }
 void EHR::MainSystem::viewPatientData(const Patient &pat, const Doctor &doc) const noexcept

@@ -10,7 +10,7 @@ namespace EHR
     class MainSystem
     {
     private:
-        std::vector<Patient> patients;
+        std::set<Patient> patients;
         std::set<Doctor> doctors;
         std::vector<MedicalEncounter> activeMedicalEncounters;
         std::vector<MedicalEncounter> archivedMedicalEncounters;
@@ -32,7 +32,7 @@ namespace EHR
         void signEncounter(const Doctor& doc, size_t pass, const MedicalEncounter &enc) noexcept;
         void print() const noexcept;
 
-        void printPrescriptions(const std::string& pat) const noexcept;
+        void printPrescriptions(const std::string& pat) noexcept;
         void markAsCompleted(Patient& pat) const noexcept;
 
 
