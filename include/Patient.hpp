@@ -31,6 +31,7 @@ namespace EHR
     {
     private:
         std::string name;
+        size_t id;
 
         std::vector<std::string> measuraments;
         std::vector<Prescription> prescriptions;        //Cant have 2 identical prescriptions
@@ -43,14 +44,16 @@ namespace EHR
         Patient() = default;
         template<typename T>
         requires SomeString<T>
-        Patient(const T& nName)
-            : name(nName)
+        Patient(const T& nName, size_t nid, const std::vector<std::string>& nMeasure, 
+                        const std::vector<Prescription> prescp, const std::set<HealthIssue> & nhealthIssues, const MedicalEncounter& nMed)
+            : name(nName), id(nid), measuraments(nMeasure), prescriptions(prescp), healthIssues(nhealthIssues), encounter(nMed)
         {
         }
 
         const MedicalEncounter & getMedEnc() const noexcept;
         const std::vector<Prescription> & getPrescriptions() const noexcept; 
-        
+        const std::string &getName() const noexcept;
+
         void print() const noexcept;
 
         void addMedicalEncounter(const MedicalEncounter& medEnc) noexcept;
@@ -58,8 +61,9 @@ namespace EHR
         void addDoctor(const Doctor &doc, MedicalEncounter& med) noexcept;
         void addMeasurament(const std::string &measure) noexcept;
         void addHealthIssue(const HealthIssue &issue) noexcept;
-
         void setPrescriptionStatus(const Prescription& prep) noexcept;
+
+
 
         auto operator<=>(const Patient& other) const
         {

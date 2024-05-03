@@ -1,0 +1,1 @@
+g++ test.cpp -Iconnector/include/mysql -Lconnector/lib64 -lmysqlcppconn

@@ -1,50 +1,28 @@
-#include <set>
-#include <iostream>
-
+#include "connector/include/mysql/jdbc.h"
 
 int main()
 {
-    std::set<int> set = {1, 2, 3, 5};
-#if 1
+    sql::mysql::MySQL_Driver *driver;
+    sql::Connection *con;
 
-    auto[iter, inserted] = set.insert(3);
 
-    if(!inserted)
+    driver = sql::mysql::get_mysql_driver_instance();
+    con = driver->connect("tcp://127.0.0.1:3306", "root", "1");
+
+    con->setSchema("dataBaze");
+    
+    sql::Statement *stmt;
+    sql::ResultSet *res;
+
+    stmt = con->createStatement();
+    res = stmt->executeQuery("SELECT * FROM Ana");
+
+    while (res->next())
     {
-        set.erase(iter);
-        set.insert(6);
+        std::cout << "ID: " << res->getInt("id") << ", Name: " << res->getInt("price") << ' ' << res->getString("numeProdus") <<'\n';
     }
 
-    auto[iter2, inserted2] = set.insert(4);
-
-    if(!inserted2)
-    {
-        set.erase(iter2);
-        set.insert(4);
-    }
-#else
-
-    auto iter = set.find(3);
-    if (iter != set.end()) {
-        set.erase(iter);
-        set.insert(6);
-    } else 
-    {
-        set.insert(3);
-    }
-
-    auto iter2 = set.find(4);
-    if (iter2 != set.end()) {
-        set.erase(iter);
-        set.insert(4);
-    } else 
-    {
-        set.insert(4);
-    }
-
-#endif
-    for(const auto & elem : set)
-    {
-        std::cout << elem;
-    }
+    delete res;
+    delete stmt;
+    delete con;
 }

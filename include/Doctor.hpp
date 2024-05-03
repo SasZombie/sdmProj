@@ -4,26 +4,21 @@
 
 namespace EHR
 {
-
-
     class Doctor
     {
     private:
         std::string name;
-        size_t ID;              //TODO: Just for testing, need a better signing shit
-        static inline size_t globalID = 0;    
+        size_t signature;             
 
     public:
         template<typename T>
         requires SomeString<T>
-        explicit Doctor(const T& nName)
-            : name(nName)
+        explicit Doctor(const T& nName, size_t signature)
+            : name(nName), signature(signature)
         {   
-            ++globalID;
-            this->ID = globalID;
         }
 
-        size_t getID() const noexcept;
+        size_t getSignature() const noexcept;
 
         const std::string& getName() const noexcept;
 

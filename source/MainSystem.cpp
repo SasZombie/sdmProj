@@ -1,14 +1,13 @@
 #include "../include/MainSystem.hpp"
 
-
 void EHR::MainSystem::patienVisits(Patient &p, const Doctor &doc) noexcept
 {
-    if(this->doctors.find(doc) == this->doctors.end())
+    
+    if(!checkDoctor(doc))
     {
-        std::cout << "This doctor is not part of ehr\n"; //TO be changed 
-        return;
+        std::cout << "This doctor is not part of our system\n";
+        return; 
     }
-
     MedicalEncounter newMed{doc};
     p.addMedicalEncounter(newMed);
     this->activeMedicalEncounters.emplace_back(newMed);
@@ -20,27 +19,38 @@ void EHR::MainSystem::patienVisits(Patient &p, const Doctor &doc) noexcept
         this->patients.insert(p);
         this->patients.erase(iter);
     }
+
+ 
 }
 
 bool EHR::MainSystem::checkDoctor(const Doctor &doc) const noexcept
 {
-    for(const auto &d : this->doctors)
+    std::set<Doctor> doctors = dataBase.getDoctors();
+
+    if(doctors.find(doc) == doctors.end())
     {
-        if(d == doc)
-            return true;
+        return false;
     }
-    std::cout << "This doctor isnt part of the system\n";
-    return false;
+
+    return true;
 }
 
 bool EHR::MainSystem::checkPatient(const Patient &pat) const noexcept
 {
-    for(const auto &p : this->patients)
+    std::set<Patient> patients = dataBase.getPatients();
+
+    if(patients.find(pat) == patients.end())
     {
-        if(p == pat)
-            return true;
+        return false;
     }
-    std::cout << "This patient isnt part of the system!\n";
+
+    return true;
+}
+
+bool EHR::MainSystem::checkPatient(const std::string &name) const noexcept
+{
+    if(dataBase.getPatientByName(name).has_value())
+        return true;
     return false;
 }
 
@@ -53,7 +63,14 @@ void EHR::MainSystem::deleteFromActive(const MedicalEncounter &med) noexcept
 }
 void EHR::MainSystem::addDoctor(const Doctor &doc) noexcept
 {
-    this->doctors.insert(doc);
+    // this->doctors.insert(doc)
+    if(checkDoctor(doc))
+    {
+        std::cout << "Doctor already in the system\n";
+        return;
+    }
+  
+    dataBase.addDoctor(doc);
 }
 
 void EHR::MainSystem::deleteMedEnc(const MedicalEncounter &med, Patient &p) noexcept
@@ -79,8 +96,13 @@ void EHR::MainSystem::healthServiciesPerformed(Patient &patien, const HealthServ
         break;
     case EHR::HealthServiceType::Refferal :
     {
-        MedicalEncounter md = healthServicies.getEncounter();
-        patien.addDoctor(Doctor{desc}, md);
+        if(dataBase.getDoctorByName(desc).has_value())
+        {
+            MedicalEncounter md = healthServicies.getEncounter();
+            patien.addDoctor(dataBase.getDoctorByName(desc).value(), md);
+        }
+        else
+            std::cout << "This doctor is not in our dataBase\n";
         break;
 
     }
@@ -99,7 +121,7 @@ void EHR::MainSystem::signEncounter(const Doctor &doc, size_t pass, const Medica
     if(!checkDoctor(doc))
         return;
 
-    if(doc.getID() != pass)
+    if(doc.getSignature() != pass)
     {
         std::cout << "Incorrect signature\n";
         return;
@@ -118,8 +140,10 @@ void EHR::MainSystem::signEncounter(const Doctor &doc, size_t pass, const Medica
 
 void EHR::MainSystem::print() const noexcept
 {
+    std::set<Doctor> doctors = dataBase.getDoctors();
+
     std::cout << "All doctors are: \n";
-    for(const auto &d : this->doctors)
+    for(const auto &d : doctors)
     {
         std::cout << d.getName() << ' ';
     }
@@ -151,15 +175,17 @@ void EHR::MainSystem::print() const noexcept
 
 void EHR::MainSystem::printPrescriptions(const std::string& pat) noexcept
 {
-    if(this->checkPatient(pat))
+
+    std::optional opt = dataBase.getPatientByName(pat);
+    if(opt.has_value())
     {
         std::cout << "Cannot find patient with ID " << pat << '\n';
         return;
     }
 
+    Patient p = opt.value();
 
-    auto pres = this->patients.find(pat);
-    for(const auto & prep : pres->getPrescriptions())
+    for(const auto & prep : p.getPrescriptions())
     {
         std::cout << prep.name << ' ' << prep.isCompleted << '\n';
     }
@@ -172,14 +198,9 @@ void EHR::MainSystem::printPrescriptions(const std::string& pat) noexcept
 
     for(const std::string & s : buff)
     {
-        auto temp = *pres;
-
-        temp.setPrescriptionStatus(Prescription{true, s});
-        this->patients.erase(pres);
-        this->patients.insert(std::move(temp));
+        p.setPrescriptionStatus({true, s});
     }
-
-
+    
 }
 void EHR::MainSystem::viewPatientData(const Patient &pat, const Doctor &doc) const noexcept
 {
@@ -192,4 +213,9 @@ void EHR::MainSystem::viewPatientData(const Patient &pat, const Doctor &doc) con
 void EHR::MainSystem::viewPatientData(const Patient &pat) const noexcept
 {
     pat.print();
+}
+
+EHR::MainSystem::~MainSystem()
+{
+
 }

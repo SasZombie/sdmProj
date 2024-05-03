@@ -2,21 +2,27 @@
 #include <iostream>
 #include <algorithm>
 #include <unordered_set>
+#include "../connector/include/mysql/jdbc.h"
 #include "Patient.hpp"
 #include "HealthServicies.hpp"
+#include "DataBase.hpp"
 
 namespace EHR
 {
     class MainSystem
     {
     private:
+
         std::set<Patient> patients;
-        std::set<Doctor> doctors;
+        // std::set<Doctor> doctors;
         std::vector<MedicalEncounter> activeMedicalEncounters;
         std::vector<MedicalEncounter> archivedMedicalEncounters;
-
+        DataBase dataBase;
+        
         bool checkDoctor(const Doctor& doc) const noexcept;
         bool checkPatient(const Patient& pat) const noexcept;
+        bool checkPatient(const std::string &name) const noexcept;
+
         void deleteFromActive(const MedicalEncounter& med) noexcept;
     public:
         MainSystem() = default;
@@ -36,7 +42,7 @@ namespace EHR
         void markAsCompleted(Patient& pat) const noexcept;
 
 
-        ~MainSystem() = default;
+        ~MainSystem();
     };    
 } // namespace EHR
 

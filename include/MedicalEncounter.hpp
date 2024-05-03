@@ -11,6 +11,7 @@ namespace EHR
     {
     private:
 
+        size_t id;
         bool finished = false;
         std::set<Doctor> doctors;
         std::vector<HealthIssue> healthIssues;
