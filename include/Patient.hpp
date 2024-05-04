@@ -14,6 +14,8 @@ namespace EHR
         bool isCompleted = false;
         std::string name;
 
+        size_t id = 0;
+
         auto operator<=>(const Prescription& other) const
         {
             return this->name <=> other.name;
@@ -34,9 +36,8 @@ namespace EHR
         size_t id;
 
         std::vector<std::string> measuraments;
-        std::vector<Prescription> prescriptions;        //Cant have 2 identical prescriptions
-
-        std::set<HealthIssue> healthIssues;
+        std::vector<Prescription> prescriptions; 
+        std::vector<HealthIssue> healthIssues;
         // std::vector<MedicalEncounter> encounters;
         MedicalEncounter encounter;
 
@@ -45,15 +46,19 @@ namespace EHR
         template<typename T>
         requires SomeString<T>
         Patient(const T& nName, size_t nid, const std::vector<std::string>& nMeasure, 
-                        const std::vector<Prescription> prescp, const std::set<HealthIssue> & nhealthIssues, const MedicalEncounter& nMed)
+                        const std::vector<Prescription> prescp, const std::vector<HealthIssue> & nhealthIssues, const MedicalEncounter& nMed)
             : name(nName), id(nid), measuraments(nMeasure), prescriptions(prescp), healthIssues(nhealthIssues), encounter(nMed)
         {
         }
 
-        const MedicalEncounter & getMedEnc() const noexcept;
-        const std::vector<Prescription> & getPrescriptions() const noexcept; 
-        const std::string &getName() const noexcept;
+        template<typename T>
+        requires SomeString<T>
+        Patient(const T& nName)
+            : name(nName)
+        {
+        }
 
+        
         void print() const noexcept;
 
         void addMedicalEncounter(const MedicalEncounter& medEnc) noexcept;
@@ -63,6 +68,13 @@ namespace EHR
         void addHealthIssue(const HealthIssue &issue) noexcept;
         void setPrescriptionStatus(const Prescription& prep) noexcept;
 
+        const std::string getMeasuraments() const noexcept;
+        std::string getPrescriptionIDs() const noexcept;
+        std::string getHealthIssuesIDs() const noexcept;
+        const MedicalEncounter & getMedEnc() const noexcept;
+        const std::vector<Prescription> & getPrescriptions() const noexcept; 
+        const std::string &getName() const noexcept;
+        size_t getId() const noexcept;
 
 
         auto operator<=>(const Patient& other) const

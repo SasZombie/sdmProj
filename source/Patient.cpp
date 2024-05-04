@@ -61,8 +61,8 @@ void EHR::Patient::addDoctor(const Doctor &doc, MedicalEncounter &med) noexcept
 void EHR::Patient::print() const noexcept
 {
     std::cout << this->name << '\n';
-    std::cout << "All encounters are: \n";
-    this->encounter.print();
+    // std::cout << "All encounters are: \n";
+    // this->encounter.print();
     // for(const auto &e : this->encounters)
     // {
     //     e.print();
@@ -75,7 +75,7 @@ const EHR::MedicalEncounter &EHR::Patient::getMedEnc() const noexcept
 }
 void EHR::Patient::addHealthIssue(const HealthIssue &issue) noexcept
 {
-    this->healthIssues.insert(issue);
+    this->healthIssues.emplace_back(issue);
     this->encounter.addHealthIssue(issue);
 }
 
@@ -90,7 +90,45 @@ void EHR::Patient::setPrescriptionStatus(const Prescription &prep) noexcept
     }
     
 }
+const std::string EHR::Patient::getMeasuraments() const noexcept
+{
+    std::string str;
+    for(const auto &line : this->measuraments)
+    {
+        str.append(line);
+    }
+    
+    return str;
+}
+std::string EHR::Patient::getHealthIssuesIDs() const noexcept
+{
+    std::string str;
+
+    for(const auto &line : this->healthIssues)
+    {
+        str.append(std::to_string(line.getId()) + ' ');
+    }
+    return str;
+}
+std::string EHR::Patient::getPrescriptionIDs() const noexcept
+{
+    std::string str;
+
+    for(const auto &line : this->prescriptions)
+    {
+        str.append(std::to_string(line.id) + ' ');
+    }
+    return str;
+}
 const std::vector<EHR::Prescription> &EHR::Patient::getPrescriptions() const noexcept
 {
     return this->prescriptions;
+}
+const std::string &EHR::Patient::getName() const noexcept
+{
+    return this->name;
+}
+size_t EHR::Patient::getId() const noexcept
+{
+    return this->id;
 }

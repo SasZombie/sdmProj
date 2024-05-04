@@ -16,18 +16,19 @@ namespace EHR
     private:
         IssueType issueType;
         std::string name;
-
+        size_t id;
     public:
         HealthIssue() = default;
         
         template<typename T>
         requires SomeString<T>
-        HealthIssue(IssueType type, const T& nName)
-            : issueType(type), name(nName)
+        HealthIssue(IssueType type, const T& nName, size_t nId = 0)
+            : issueType(type), name(nName), id(nId)
         {
         }
 
         const std::string & getName() const noexcept;
+        size_t getId() const noexcept;
         
         auto operator<=>(const HealthIssue& other) const
         {

@@ -13,7 +13,7 @@ namespace EHR
     {
     private:
 
-        std::set<Patient> patients;
+        // std::set<Patient> patients;
         // std::set<Doctor> doctors;
         std::vector<MedicalEncounter> activeMedicalEncounters;
         std::vector<MedicalEncounter> archivedMedicalEncounters;
@@ -26,6 +26,9 @@ namespace EHR
         void deleteFromActive(const MedicalEncounter& med) noexcept;
     public:
         MainSystem() = default;
+        
+        Doctor createAndGet(const std::string& name) const noexcept;
+
         void addDoctor(const Doctor& doc) noexcept;
 
         void patienVisits(Patient& p, const Doctor& doc) noexcept;

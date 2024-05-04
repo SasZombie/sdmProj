@@ -1,25 +1,29 @@
 #include <iostream>
 #include <set>
+#include <string>
+#include <sstream>
+#include <vector>
 
-class a
+std::vector<std::string> divByLines(const std::string &str) noexcept
 {
-private:
-    /* data */
-public:
-    const std::set<int> getSet()
+    std::vector<std::string> tokens;
+    std::string token;
+    std::istringstream tokenStream(str);
+    while (std::getline(tokenStream, token, ' '))
     {
-        std::set<int> sets = {1, 2, 3, 4};
-        return sets;
+        tokens.push_back(token);
     }
-};
-
+    return tokens;
+}
 
 int main()
 {
 
-    a a1;
-    const std::set<int> nset = a1.getSet();
+    std::string strinul = "12 13 15 23 74";
+    std::vector<std::string>  vec = divByLines(strinul);
 
-    std::cout << nset.size();
-
+    for (const auto& line : vec) {
+        std::cout << std::stoi(line) << '\n';
+        std::cout << line << '\n';
+    }
 }

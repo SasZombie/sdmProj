@@ -9,18 +9,16 @@ void EHR::MainSystem::patienVisits(Patient &p, const Doctor &doc) noexcept
         return; 
     }
     MedicalEncounter newMed{doc};
+
     p.addMedicalEncounter(newMed);
     this->activeMedicalEncounters.emplace_back(newMed);
-    
-    auto[iter, inserted] = this->patients.insert(p);    
-    
-    if(!inserted)
-    {
-        this->patients.insert(p);
-        this->patients.erase(iter);
-    }
+    // dataBase.createMedicalEncounter
+    std::optional patient = this->dataBase.getPatientByName(p.getName());
 
- 
+    if(patient.has_value())
+        this->dataBase.uppdatePatient(p);
+    else
+        this->dataBase.addPatient(p);
 }
 
 bool EHR::MainSystem::checkDoctor(const Doctor &doc) const noexcept
@@ -37,9 +35,9 @@ bool EHR::MainSystem::checkDoctor(const Doctor &doc) const noexcept
 
 bool EHR::MainSystem::checkPatient(const Patient &pat) const noexcept
 {
-    std::set<Patient> patients = dataBase.getPatients();
+    std::set<Patient> patients2 = dataBase.getPatients();
 
-    if(patients.find(pat) == patients.end())
+    if(patients2.find(pat) == patients2.end())
     {
         return false;
     }
@@ -69,7 +67,7 @@ void EHR::MainSystem::addDoctor(const Doctor &doc) noexcept
         std::cout << "Doctor already in the system\n";
         return;
     }
-  
+
     dataBase.addDoctor(doc);
 }
 
@@ -116,6 +114,10 @@ void EHR::MainSystem::healthServiciesPerformed(Patient &patien, const HealthServ
     }
 }
 
+EHR::Doctor EHR::MainSystem::createAndGet(const std::string &name) const noexcept
+{
+    return this->dataBase.createAndGet(name);
+}
 void EHR::MainSystem::signEncounter(const Doctor &doc, size_t pass, const MedicalEncounter &enc) noexcept
 {
     if(!checkDoctor(doc))
@@ -128,13 +130,13 @@ void EHR::MainSystem::signEncounter(const Doctor &doc, size_t pass, const Medica
     }
 
 
-    for(auto & encounters : this->activeMedicalEncounters)
-    {
-        if(encounters == enc)
-        {
-            encounters.setFinished();
-        }
-    }
+    // for(auto & encounters : this->activeMedicalEncounters)
+    // {
+    //     if(encounters == enc)
+    //     {
+    //         encounters.setFinished();
+    //     }
+    // }
 
 }
 
@@ -145,32 +147,33 @@ void EHR::MainSystem::print() const noexcept
     std::cout << "All doctors are: \n";
     for(const auto &d : doctors)
     {
-        std::cout << d.getName() << ' ';
+        std::cout << d.getName() << ' ' << d.getSignature() << '\n';
     }
 
     std::cout << "\n------------------------------\n";
 
+    std::set<Patient> patients = dataBase.getPatients();
     std::cout << "All patients are: \n";
-    for(const auto &p : this->patients)
+    for(const auto &p : patients)
     {
         p.print();
     }
 
-    std::cout << "\n------------------------------\n";
+    // std::cout << "\n------------------------------\n";
 
-    std::cout << "All archived Encounters are: \n";
-    for(const auto &p : this->archivedMedicalEncounters)
-    {
-        p.print();
-    }
+    // std::cout << "All archived Encounters are: \n";
+    // for(const auto &p : this->archivedMedicalEncounters)
+    // {
+    //     p.print();
+    // }
 
-    std::cout << "\n------------------------------\n";
+    // std::cout << "\n------------------------------\n";
 
-    std::cout << "All active Encounters are: \n";
-    for(const auto &p : this->activeMedicalEncounters)
-    {
-        p.print();
-    }    
+    // std::cout << "All active Encounters are: \n";
+    // for(const auto &p : this->activeMedicalEncounters)
+    // {
+    //     p.print();
+    // }    
 }
 
 void EHR::MainSystem::printPrescriptions(const std::string& pat) noexcept

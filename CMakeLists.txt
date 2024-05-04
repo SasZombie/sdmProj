@@ -16,3 +16,4 @@ file(GLOB SOURCE_FILES "${SOURCE_DIR}/*.cpp")
 
 add_executable(main main.cpp ${SOURCE_FILES})
 # target_link_libraries(main raylib GL m pthread dl rt X11)
+target_link_libraries(main mysqlcppconn)
