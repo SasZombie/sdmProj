@@ -27,11 +27,16 @@ namespace EHR
     public:
         MainSystem() = default;
         
-        Doctor createAndGet(const std::string& name) const noexcept;
+        std::optional<EHR::Doctor> createAndGet(const std::string& name) const noexcept;
 
         void addDoctor(const Doctor& doc) noexcept;
+        void addDoctor(const std::string& name) noexcept;
 
         void patienVisits(Patient& p, const Doctor& doc) noexcept;
+        void patienVisits(const std::string& pName, const std::string& docName) noexcept;
+
+        void addHealthIssue(const std::string& name, const std::string &issueName, IssueType iType) const noexcept;
+
 
         void viewPatientData(const Patient &pat, const Doctor& doc) const noexcept;
         void viewPatientData(const Patient &pat) const noexcept;

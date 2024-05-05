@@ -9,22 +9,22 @@ int main()
 
     // EHR::Doctor doc("Doctor1");
     // EHR::Doctor doc2("Doctor2");
-    EHR::Doctor doc3 = system.createAndGet("Doctor5");
+    // system.createAndGet("Doctor5");
+    system.addDoctor("Doctor5");
 
-
-    EHR::Patient patient{"Patient1"};
+    system.patienVisits("Patient1", "Doctor5");
 
     EHR::HealthServicies h{EHR::HealthServiceType::Prescription, "Paracetamol"};
     EHR::HealthServicies prep{EHR::HealthServiceType::Prescription, "Papanas"};
     EHR::HealthIssue hi{EHR::IssueType::Chronic, "Cancer"};
     EHR::HealthIssue h2{EHR::IssueType::Chronic, "Black"};
 
-    system.addDoctor(doc3);
+    system.addHealthIssue("Patient1", hi);
+
+    // system.addDoctor(doc3);
     // system.patienVisits(patient, doc);
-    // patient.addHealthIssue(hi);
     // patient.addHealthIssue(h2);
     // system.healthServiciesPerformed(patient, h);
-    std::cout << doc3.getSignature();
 
     system.print();
 

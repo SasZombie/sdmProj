@@ -19,21 +19,22 @@ namespace EHR
         std::vector<HealthIssue> getAllIssues(const std::string &healthId) const noexcept;
         std::set<Doctor> getAllDoctorsByID(const std::string &doctorIDs) const noexcept;
 
-        Doctor createDoctor(const std::string& name) const noexcept;
     public:
         DataBase();
-        
-        Doctor createAndGet(const std::string& name) const noexcept;
-
+    
         //Doctors
+        Doctor createDoctor(const std::string& name) const noexcept;
         const std::set<Doctor> getDoctors() const noexcept;
         void addDoctor(const Doctor& doc) const noexcept;
         std::optional<Doctor> getDoctorByName(const std::string & name) const noexcept;
+        // std::optional<Doctor> getDoctorByID(const std::string & ID) const noexcept;
 
         //Patients
         const std::set<Patient> getPatients() const noexcept;
+        void createPatient(const std::string &name, size_t medEncId) const noexcept;
         void addPatient(const Patient& pat) const noexcept;
         void uppdatePatient(const Patient& pat) const noexcept;
+        void uppdatePatient(const std::string &name, size_t medEncId) const noexcept;
         void uppdatePatientPrescription(const Patient& prep) const noexcept;
         std::optional<Patient> getPatientByName(const std::string & name) const noexcept;
 
@@ -43,6 +44,11 @@ namespace EHR
         void addEncounter(const MedicalEncounter& med) const noexcept;
         void uppdateEncounter(const MedicalEncounter& med) const noexcept;
         std::optional<MedicalEncounter> getEncounterById(size_t id) const noexcept;
+
+
+        //HealthIssues
+
+        HealthIssue createHealthIssue(const std::string &issueName, IssueType iType) const noexcept;
 
 
         ~DataBase();

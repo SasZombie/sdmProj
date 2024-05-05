@@ -53,7 +53,7 @@ namespace EHR
 
         template<typename T>
         requires SomeString<T>
-        Patient(const T& nName)
+        explicit Patient(const T& nName)
             : name(nName)
         {
         }

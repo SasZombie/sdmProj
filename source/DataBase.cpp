@@ -1,14 +1,9 @@
 #include "../include/DataBase.hpp"
 
-
 EHR::DataBase::DataBase()
 {
     con->setSchema("MainSystem");
-}
-
-EHR::Doctor EHR::DataBase::createAndGet(const std::string &name) const noexcept
-{
-    return createDoctor(name);
+    con->setAutoCommit(true);
 }
 
 std::vector<EHR::Prescription> EHR::DataBase::getAllPrescriptions(const std::string &prescId) const noexcept
@@ -94,6 +89,7 @@ EHR::Doctor EHR::DataBase::createDoctor(const std::string &name) const noexcept
     
     return getDoctorByName(name).value();
 }
+
 std::vector<std::string> EHR::DataBase::divByLines(const std::string &str, char delimiter) const noexcept
 {
     std::vector<std::string> tokens;
@@ -133,6 +129,7 @@ void EHR::DataBase::addDoctor(const Doctor &doc) const noexcept
 
     delete pstmt;
 }
+
 EHR::MedicalEncounter EHR::DataBase::createMedEncounter(const Doctor& docr) const noexcept
 {
 
@@ -140,13 +137,22 @@ EHR::MedicalEncounter EHR::DataBase::createMedEncounter(const Doctor& docr) cons
     pstmt->setUInt64(1, docr.getSignature());
     pstmt->setUInt64(2, 0);
 
-    pstmt->execute();
+    pstmt->executeUpdate();
     
     delete pstmt;
 
-    sql::ResultSet *rs = con->createStatement()->executeQuery("SELECT * FROM products ORDER BY product_id DESC LIMIT 1");
+    sql::Statement *stmt = con->createStatement();
 
-    return MedicalEncounter{};
+    sql::ResultSet *rs = stmt->executeQuery("SELECT LAST_INSERT_ID()");
+    size_t id = 0;
+
+    if(rs->next())
+        id = rs->getUInt64(1);
+
+    delete rs;
+    delete stmt;
+
+    return {docr, id};
 }
 
 std::optional<EHR::Doctor> EHR::DataBase::getDoctorByName(const std::string &name) const noexcept
@@ -199,6 +205,30 @@ const std::set<EHR::Patient> EHR::DataBase::getPatients() const noexcept
 
     return patients;
 }
+void EHR::DataBase::createPatient(const std::string &name, size_t medEncId) const noexcept
+{
+    sql::PreparedStatement *pstmt = con->prepareStatement("INSERT INTO Patients (Name, Encounter) VALUES (?, ?)");
+
+    pstmt->setString(1, name);
+    pstmt->setUInt64(2, medEncId);
+
+    pstmt->execute();
+
+    delete pstmt;
+}
+
+void EHR::DataBase::uppdatePatient(const std::string &name, size_t medEncId) const noexcept
+{
+    sql::PreparedStatement *pstmt = con->prepareStatement("UPDATE Patients SET Encounter = ? WHERE Name = ?");
+    
+    pstmt->setUInt64(1, medEncId);
+    pstmt->setString(2, name);
+
+    pstmt->execute();
+
+    delete pstmt;
+}
+
 std::optional<EHR::Patient> EHR::DataBase::getPatientByName(const std::string &name) const noexcept
 {
     std::set<Patient> patients = this->getPatients();
@@ -282,6 +312,31 @@ void EHR::DataBase::uppdatePatient(const Patient &pat) const noexcept
 
     delete pstmt;
 }
+
+EHR::HealthIssue EHR::DataBase::createHealthIssue(const std::string &issueName, IssueType iType) const noexcept
+{
+    sql::PreparedStatement* pstmt = con->prepareStatement("INSERT INTO HealthIssues (Name, IssueType) VALUES (?, ?)");
+    pstmt->setString(1, issueName);
+    pstmt->setInt(2, static_cast<int>(iType));
+
+    pstmt->executeUpdate();
+    
+    delete pstmt;
+
+    sql::Statement *stmt = con->createStatement();
+
+    sql::ResultSet *rs = stmt->executeQuery("SELECT LAST_INSERT_ID()");
+    size_t id = 0;
+
+    if(rs->next())
+        id = rs->getUInt64(1);
+
+    delete rs;
+    delete stmt;
+
+    return {iType, issueName, id};
+}
+
 EHR::DataBase::~DataBase()
 {
     delete con;

@@ -21,6 +21,35 @@ void EHR::MainSystem::patienVisits(Patient &p, const Doctor &doc) noexcept
         this->dataBase.addPatient(p);
 }
 
+void EHR::MainSystem::patienVisits(const std::string &pName, const std::string &docName) noexcept
+{
+    if(!checkDoctor(Doctor{docName}))
+    {
+        std::cout << "This doctor is not part of our system\n";
+        return; 
+    }
+
+    Doctor doc = this->dataBase.getDoctorByName(docName).value();
+
+
+    MedicalEncounter newMed = this->dataBase.createMedEncounter(doc);
+    this->activeMedicalEncounters.emplace_back(newMed);
+
+    if(!checkPatient(pName))
+    {
+        this->dataBase.createPatient(pName, newMed.getId());
+    }   
+    else
+    {
+        this->dataBase.uppdatePatient(pName, newMed.getId());
+    }
+
+
+}
+void EHR::MainSystem::addHealthIssue(const std::string &name, const std::string &issueName, IssueType iType) const noexcept
+{
+    HealthIssue hi = this->dataBase.createHealthIssue(issueName, iType);
+}
 bool EHR::MainSystem::checkDoctor(const Doctor &doc) const noexcept
 {
     std::set<Doctor> doctors = dataBase.getDoctors();
@@ -61,7 +90,6 @@ void EHR::MainSystem::deleteFromActive(const MedicalEncounter &med) noexcept
 }
 void EHR::MainSystem::addDoctor(const Doctor &doc) noexcept
 {
-    // this->doctors.insert(doc)
     if(checkDoctor(doc))
     {
         std::cout << "Doctor already in the system\n";
@@ -71,6 +99,15 @@ void EHR::MainSystem::addDoctor(const Doctor &doc) noexcept
     dataBase.addDoctor(doc);
 }
 
+void EHR::MainSystem::addDoctor(const std::string &name) noexcept
+{
+    if(checkDoctor(Doctor{name}))
+    {
+        std::cout << "Doctor already in the system\n";
+        return;
+    }
+    dataBase.createDoctor(name);
+}
 void EHR::MainSystem::deleteMedEnc(const MedicalEncounter &med, Patient &p) noexcept
 {
     this->deleteFromActive(med);
@@ -114,9 +151,14 @@ void EHR::MainSystem::healthServiciesPerformed(Patient &patien, const HealthServ
     }
 }
 
-EHR::Doctor EHR::MainSystem::createAndGet(const std::string &name) const noexcept
-{
-    return this->dataBase.createAndGet(name);
+std::optional<EHR::Doctor> EHR::MainSystem::createAndGet(const std::string &name) const noexcept
+{   
+    if(checkDoctor(Doctor{name}))
+    {
+        std::cout << "Doctor already in the system\n";
+        return std::nullopt;
+    }
+    return this->dataBase.createDoctor(name);
 }
 void EHR::MainSystem::signEncounter(const Doctor &doc, size_t pass, const MedicalEncounter &enc) noexcept
 {

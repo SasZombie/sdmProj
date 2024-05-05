@@ -7,13 +7,15 @@ EHR::MedicalEncounter::MedicalEncounter(const Doctor &doctor, const HealthIssue 
     this->healthIssues.emplace_back(issue);
 }
 
-EHR::MedicalEncounter::MedicalEncounter(const HealthIssue &issue)
+EHR::MedicalEncounter::MedicalEncounter(const HealthIssue &issue, size_t nId)
+    : id(nId)
 {
     this->healthIssues.emplace_back(issue);
 }
 
 
-EHR::MedicalEncounter::MedicalEncounter(const Doctor &doctor)
+EHR::MedicalEncounter::MedicalEncounter(const Doctor &doctor, size_t nId)
+    : id(nId)
 {
     this->doctors.insert(doctor);
 }

@@ -17,9 +17,9 @@ namespace EHR
 
     public:
         MedicalEncounter() = default;
-        MedicalEncounter(const Doctor& doctor);
-        MedicalEncounter(const HealthIssue &issue);
-        MedicalEncounter(const Doctor& doctor, const HealthIssue &issue, size_t id = 0);
+        MedicalEncounter(const Doctor& doctor, size_t nId = 0);
+        MedicalEncounter(const HealthIssue &issue, size_t nId = 0);
+        MedicalEncounter(const Doctor& doctor, const HealthIssue &issue, size_t nId = 0);
         MedicalEncounter(const std::set<Doctor>& nDoctors, const std::vector<HealthIssue> &issue, size_t nId = 0);
 
         void addHealthIssue(const HealthIssue &issue) noexcept;
