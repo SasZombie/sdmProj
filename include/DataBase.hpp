@@ -40,7 +40,7 @@ namespace EHR
 
         //Encounters
         MedicalEncounter createMedEncounter(const Doctor& docr) const noexcept;
-        const std::set<MedicalEncounter> getEncounters() const noexcept;
+        const std::vector<MedicalEncounter> getEncounters() const noexcept;
         void addEncounter(const MedicalEncounter& med) const noexcept;
         void uppdateEncounter(const MedicalEncounter& med) const noexcept;
         std::optional<MedicalEncounter> getEncounterById(size_t id) const noexcept;
@@ -49,7 +49,15 @@ namespace EHR
         //HealthIssues
 
         HealthIssue createHealthIssue(const std::string &issueName, IssueType iType) const noexcept;
+        void addHealthIssueToPatient(const Patient& pat, const HealthIssue& issue) const noexcept;
+        void addHealthIssueToMedicalEncounter(const Patient& pat, const HealthIssue& issue) const noexcept;
 
+
+        //Health Servicies
+
+        size_t createAndGetPrescription(const std::string & str) const noexcept;
+        void addMeasurement(const Patient& pat, const std::string & str) const noexcept;
+        void addPrescription(const Patient& pat, size_t prescID) const noexcept;
 
         ~DataBase();
     };

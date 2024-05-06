@@ -65,7 +65,7 @@ namespace EHR
         void addPrescription(const std::string &prescriotion) noexcept;
         void addDoctor(const Doctor &doc, MedicalEncounter& med) noexcept;
         void addMeasurament(const std::string &measure) noexcept;
-        void addHealthIssue(const HealthIssue &issue) noexcept;
+        bool addHealthIssue(const HealthIssue &issue) noexcept;
         void setPrescriptionStatus(const Prescription& prep) noexcept;
 
         const std::string getMeasuraments() const noexcept;

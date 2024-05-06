@@ -61,22 +61,32 @@ void EHR::Patient::addDoctor(const Doctor &doc, MedicalEncounter &med) noexcept
 void EHR::Patient::print() const noexcept
 {
     std::cout << this->name << '\n';
-    // std::cout << "All encounters are: \n";
-    // this->encounter.print();
-    // for(const auto &e : this->encounters)
-    // {
-    //     e.print();
-    // }
+    std::cout << "All encounters are: \n";
+    this->encounter.print();
+
+    for(const auto & is : this->healthIssues)
+    {
+        std::cout << is.getName() << '\n';
+    }
+
 }
 
 const EHR::MedicalEncounter &EHR::Patient::getMedEnc() const noexcept
 {
     return this->encounter;
 }
-void EHR::Patient::addHealthIssue(const HealthIssue &issue) noexcept
+bool EHR::Patient::addHealthIssue(const HealthIssue &issue) noexcept
 {
-    this->healthIssues.emplace_back(issue);
-    this->encounter.addHealthIssue(issue);
+    auto iter = std::find(this->healthIssues.begin(), this->healthIssues.end(), issue);
+
+    if(iter == healthIssues.end())
+    {
+        this->healthIssues.emplace_back(issue);
+        this->encounter.addHealthIssue(issue);
+
+        return true;
+    }
+    return false;
 }
 
 void EHR::Patient::setPrescriptionStatus(const Prescription &prep) noexcept

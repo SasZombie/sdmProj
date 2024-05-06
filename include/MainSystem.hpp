@@ -42,7 +42,7 @@ namespace EHR
         void viewPatientData(const Patient &pat) const noexcept;
         void deleteMedEnc(const MedicalEncounter& med, Patient &p) noexcept;
         void archiveMedEnc(const MedicalEncounter& med, Patient &p) noexcept;
-        void healthServiciesPerformed(Patient &patien, const HealthServicies &healthServicies) noexcept;
+        void healthServiciesPerformed(const std::string &patien, const HealthServicies &healthServicies) const noexcept;
         void signEncounter(const Doctor& doc, size_t pass, const MedicalEncounter &enc) noexcept;
         void print() const noexcept;
 

@@ -49,6 +49,20 @@ void EHR::MainSystem::patienVisits(const std::string &pName, const std::string &
 void EHR::MainSystem::addHealthIssue(const std::string &name, const std::string &issueName, IssueType iType) const noexcept
 {
     HealthIssue hi = this->dataBase.createHealthIssue(issueName, iType);
+    std::optional<Patient> p = this->dataBase.getPatientByName(name);
+
+    if(!p.has_value())
+    {
+        std::cout << "This patient is not in our database! Make sure you call system.patientVisits before\n!";
+        return;
+    }
+
+    if(p.value().addHealthIssue(hi))
+    {
+        this->dataBase.addHealthIssueToPatient(p.value(), hi);
+    }
+
+    this->dataBase.addHealthIssueToMedicalEncounter(p.value(), hi);
 }
 bool EHR::MainSystem::checkDoctor(const Doctor &doc) const noexcept
 {
@@ -120,21 +134,32 @@ void EHR::MainSystem::archiveMedEnc(const MedicalEncounter &med, Patient &p) noe
     this->archivedMedicalEncounters.emplace_back(p.getMedEnc());
     p.addMedicalEncounter(med);
 }
-void EHR::MainSystem::healthServiciesPerformed(Patient &patien, const HealthServicies &healthServicies) noexcept
-{
-    const std::string desc = healthServicies.getDescritpion();
+void EHR::MainSystem::healthServiciesPerformed(const std::string &patientName, const HealthServicies &healthServicies) const noexcept
+{   
+
+    std::optional<Patient> p = this->dataBase.getPatientByName(patientName);
+    if(!p.has_value())
+    {
+        std::cout << "Cannot apply health Servicies because Patient isnt in our system!\n";
+        return;
+    }
+
+    const std::string desc = healthServicies.getDescritpion();  
+
 
     switch (healthServicies.getType())
     {
     case EHR::HealthServiceType::Measuraments :
-        patien.addMeasurament(desc);
-        break;
+        {
+            size_t id = this->dataBase.createAndGetPrescription(desc);
+            this->dataBase.addPrescription(p.value(), id);
+            break;
+        }
     case EHR::HealthServiceType::Refferal :
     {
-        if(dataBase.getDoctorByName(desc).has_value())
+        if(checkDoctor(Doctor{desc}))
         {
-            MedicalEncounter md = healthServicies.getEncounter();
-            patien.addDoctor(dataBase.getDoctorByName(desc).value(), md);
+
         }
         else
             std::cout << "This doctor is not in our dataBase\n";
@@ -142,7 +167,7 @@ void EHR::MainSystem::healthServiciesPerformed(Patient &patien, const HealthServ
 
     }
     case EHR::HealthServiceType::Prescription :
-        patien.addPrescription(desc);
+        p.value().addPrescription(desc);
         break;
     
     default:
