@@ -2,18 +2,17 @@
 #include <iostream>
 #include <algorithm>
 #include <unordered_set>
-#include "../connector/include/mysql/jdbc.h"
 #include "Patient.hpp"
 #include "HealthServicies.hpp"
 #include "DataBase.hpp"
-#include "DoctorDB.hpp"
+
+
 namespace EHR
 {
     class MainSystem
     {
     private:
         DataBase dataBase;
-        DoctorDB docDB;
 
         bool checkDoctor(const Doctor& doc) const noexcept;
         bool checkPatient(const Patient& pat) const noexcept;

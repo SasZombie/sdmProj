@@ -1,7 +1,7 @@
 #include "../include/MainSystem.hpp"
  
 EHR::MainSystem::MainSystem(const std::string &schema)
-    : dataBase(schema), docDB(dataBase)
+    : dataBase(schema)
 {
 
 }
@@ -205,9 +205,9 @@ void EHR::MainSystem::printPrescriptions(const std::string& pat) noexcept
 {
 
     std::optional opt = dataBase.getPatientByName(pat);
-    if(opt.has_value())
+    if(!opt.has_value())
     {
-        std::cout << "Cannot find patient with ID " << pat << '\n';
+        std::cout << "Cannot find patient with name " << pat << '\n';
         return;
     }
 
@@ -215,19 +215,18 @@ void EHR::MainSystem::printPrescriptions(const std::string& pat) noexcept
 
     for(const auto & prep : p.getPrescriptions())
     {
-        std::cout << prep.name << ' ' << prep.isCompleted << '\n';
+        std::cout << prep.name << ' ' << (prep.isCompleted ? "Taken" : "Not Taken") << '\n';
     }
 
-    std::cout << "Please Specify witch prescriptions to complete\n This action CANNOT be undone\n";
+    std::cout << "Please Specify witch prescriptions to change status\n";
 
-    std::vector<std::string> buff;
-
+    std::vector<size_t> buff;
+    size_t a;
+    std::cin >> a;
+    buff.push_back(a);
     //Insert Gui to add to buffer
 
-    for(const std::string & s : buff)
-    {
-        p.setPrescriptionStatus({true, s});
-    }
+    this->dataBase.uppdatePatientPrescription(buff);
     
 }
 void EHR::MainSystem::signEncounterCorrect(size_t digitalSignature, const std::string& patName) const noexcept

@@ -37,7 +37,7 @@ namespace EHR
         void addPatient(const Patient& pat) const noexcept;
         void uppdatePatient(const Patient& pat) const noexcept;
         void uppdatePatient(const std::string &name, size_t medEncId) const noexcept;
-        void uppdatePatientPrescription(const Patient& prep) const noexcept;
+        void uppdatePatientPrescription(const std::vector<size_t> &prescID) const noexcept;
         std::optional<Patient> getPatientByName(const std::string & name) const noexcept;
 
         //Encounters
@@ -50,14 +50,12 @@ namespace EHR
 
 
         //HealthIssues
-
         HealthIssue createHealthIssue(const std::string &issueName, IssueType iType) const noexcept;
         void addHealthIssueToPatient(const Patient& pat, const HealthIssue& issue) const noexcept;
         void addHealthIssueToMedicalEncounter(const Patient& pat, const HealthIssue& issue) const noexcept;
 
 
         //Health Servicies
-
         size_t createAndGetPrescription(const std::string & str) const noexcept;
         void addMeasurement(const Patient& pat, const std::string & str) const noexcept;
         void addPrescription(const Patient& pat, size_t prescID) const noexcept;

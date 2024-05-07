@@ -255,13 +255,23 @@ void EHR::DataBase::uppdatePatient(const Patient &pat) const noexcept
 }
 
 //TODO!!!
-void EHR::DataBase::uppdatePatientPrescription(const Patient &prep) const noexcept
+void EHR::DataBase::uppdatePatientPrescription(const std::vector<size_t> &prescID) const noexcept
 {
+    for(const auto &num : prescID)
+    {
+        sql::PreparedStatement *pstmt = con->prepareStatement("UPDATE Prescriptions SET Completed = NOT Completed WHERE id = ?");
+    
+        pstmt->setUInt64(1, num);
+
+        pstmt->execute();
+
+        delete pstmt;
+    }
 }
 
 std::optional<EHR::Patient> EHR::DataBase::getPatientByName(const std::string &name) const noexcept
 {
-   sql::PreparedStatement* pstmt = con->prepareStatement("SELECT * FROM Patients WHERE Name = ?");
+    sql::PreparedStatement* pstmt = con->prepareStatement("SELECT * FROM Patients WHERE Name = ?");
 
     pstmt->setString(1, name);   
 
