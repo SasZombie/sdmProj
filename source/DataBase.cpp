@@ -1,11 +1,20 @@
 #include "../include/DataBase.hpp"
 
+
 EHR::DataBase::DataBase(const std::string& schema)
 {
     con->setSchema(schema);
     con->setAutoCommit(true);
 }
 
+sql::ResultSet *EHR::DataBase::executeQuerry(const std::string &querry) const noexcept
+{
+    return con->createStatement()->executeQuery(querry);
+}
+sql::PreparedStatement * EHR::DataBase::prepareStatement(const std::string &querry) const noexcept
+{
+    return con->prepareStatement(querry);
+}
 std::vector<EHR::Prescription> EHR::DataBase::getAllPrescriptions(const std::string &prescId) const noexcept
 {
     std::vector<std::string> ids = this->divByLines(prescId, ' ');    
@@ -229,13 +238,26 @@ void EHR::DataBase::uppdatePatient(const std::string &name, size_t medEncId) con
 
 std::optional<EHR::Patient> EHR::DataBase::getPatientByName(const std::string &name) const noexcept
 {
-    std::set<Patient> patients = this->getPatients();
+   sql::PreparedStatement* pstmt = con->prepareStatement("SELECT * FROM Patients WHERE Name = ?");
 
-    for (const auto &pat : patients)
-    {
-        if (pat.getName() == name)
-            return pat;
+    pstmt->setString(1, name);   
+
+    sql::ResultSet* res = pstmt->executeQuery();
+
+    if(res->next())
+    {  
+        MedicalEncounter med;
+        Patient pat{res->getString("Name"), res->getUInt64("id"), divByLines(res->getString("Measurements"), '\n'),
+                                getAllPrescriptions(res->getString("PrescIDs")), getAllIssues(res->getString("HealthIssuesIDs")),
+                                getEncounterById(res->getUInt64("Encounter")).value_or(med)};
+
+        delete res;
+        delete pstmt;
+        return pat;
     }
+
+    delete res;
+    delete pstmt;
 
     return std::nullopt;
 }

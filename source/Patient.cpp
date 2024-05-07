@@ -4,6 +4,36 @@ static const std::unordered_map<std::string, std::vector<std::string>> contraInd
     {"Paracetamol", {"Rubeola", "Medicament2", "Medicament3", "Cancer", "Papanas"}}
 };
 
+
+EHR::Patient::Patient(const Patient& other) noexcept
+    : name(other.name), id(other.id), measuraments(other.measuraments), prescriptions(other.prescriptions), healthIssues(other.healthIssues),
+        encounter(other.encounter)
+{
+
+}
+
+EHR::Patient::Patient(Patient&& other) noexcept 
+    : name(std::move(other.name)), id(std::move(other.id)), measuraments(std::move(other.measuraments)), prescriptions(std::move(other.prescriptions)),
+        healthIssues(std::move(other.healthIssues)), encounter(std::move(other.encounter))
+{
+
+}
+
+EHR::Patient& EHR::Patient::operator=(Patient&& other) noexcept 
+{
+    if (this != &other) 
+    {
+        name = std::move(other.name);
+        id = std::move(other.id);
+        measuraments = std::move(other.measuraments);
+        prescriptions = std::move(other.prescriptions);
+        healthIssues = std::move(other.healthIssues);
+        encounter = std::move(other.encounter);
+    }
+
+    return *this;
+}
+
 void EHR::Patient::addMedicalEncounter(const MedicalEncounter &medEnc) noexcept
 {
     // this->encounters.emplace_back(medEnc);
@@ -75,6 +105,7 @@ const EHR::MedicalEncounter &EHR::Patient::getMedEnc() const noexcept
 {
     return this->encounter;
 }
+
 bool EHR::Patient::addHealthIssue(const HealthIssue &issue) noexcept
 {
     auto iter = std::find(this->healthIssues.begin(), this->healthIssues.end(), issue);

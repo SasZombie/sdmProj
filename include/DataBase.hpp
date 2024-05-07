@@ -22,6 +22,9 @@ namespace EHR
     public:
         DataBase(const std::string &schema);
     
+        sql::ResultSet* executeQuerry(const std::string& querry) const noexcept;
+        sql::ResultSet* executeQuerry(const sql::PreparedStatement *prep) const noexcept;
+        sql::PreparedStatement* prepareStatement(const std::string& querry) const noexcept;
         //Doctors
         Doctor createDoctor(const std::string& name) const noexcept;
         const std::set<Doctor> getDoctors() const noexcept;

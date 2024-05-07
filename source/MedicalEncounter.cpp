@@ -26,6 +26,29 @@ EHR::MedicalEncounter::MedicalEncounter(const std::set<Doctor>& nDoctors, const 
 
 }
 
+EHR::MedicalEncounter::MedicalEncounter(const MedicalEncounter& other)
+    : doctors(other.doctors), healthIssues(other.healthIssues), id(other.id)
+{
+
+}
+
+EHR::MedicalEncounter::MedicalEncounter(MedicalEncounter&& other) noexcept
+    : doctors(std::move(other.doctors)), healthIssues(std::move(other.healthIssues)), id(std::exchange(other.id, 0))
+{
+
+}
+
+EHR::MedicalEncounter& EHR::MedicalEncounter::operator=(const MedicalEncounter& other) noexcept
+{
+    if (this != &other) 
+    {
+        doctors = other.doctors;
+        healthIssues = other.healthIssues;
+        id = other.id;
+    }
+    return *this;
+}
+
 
 void EHR::MedicalEncounter::addDoctor(const Doctor &doctor) noexcept
 {

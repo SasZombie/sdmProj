@@ -1,34 +1,32 @@
 #include "../include/MainSystem.hpp"
  
 EHR::MainSystem::MainSystem(const std::string &schema)
-    : dataBase(schema)
+    : dataBase(schema), docDB(dataBase)
 {
 
 }
 
 void EHR::MainSystem::patienVisits(const std::string &pName, const std::string &docName) noexcept
 {
-    if(!checkDoctor(Doctor{docName}))
+
+    std::optional<Doctor> doc = this->dataBase.getDoctorByName(docName);
+    if(!doc.has_value())
     {
         std::cout << "This doctor is not part of our system\n";
         return; 
     }
-
-    Doctor doc = this->dataBase.getDoctorByName(docName).value();
-
-
-    MedicalEncounter newMed = this->dataBase.createMedEncounter(doc);
-
-    if(!checkPatient(pName))
+    
+    MedicalEncounter newMed = this->dataBase.createMedEncounter(doc.value());
+    std::optional<Patient> pat = this->dataBase.getPatientByName(pName);
+    if(!pat.has_value())
     {
         this->dataBase.createPatient(pName, newMed.getId());
     }   
     else
     {
-        this->dataBase.uppdatePatient(pName, newMed.getId());
         this->dataBase.archiveEncounter(pName);
+        this->dataBase.uppdatePatient(pName, newMed.getId());
     }
-
 }
 void EHR::MainSystem::addHealthIssue(const std::string &name, const std::string &issueName, const std::string &docName, IssueType iType) const noexcept
 {

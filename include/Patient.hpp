@@ -42,22 +42,29 @@ namespace EHR
         MedicalEncounter encounter;
 
     public:
-        Patient() = default;
+        Patient() noexcept = default;
         template<typename T>
         requires SomeString<T>
         Patient(const T& nName, size_t nid, const std::vector<std::string>& nMeasure, 
-                        const std::vector<Prescription> prescp, const std::vector<HealthIssue> & nhealthIssues, const MedicalEncounter& nMed)
+                        const std::vector<Prescription> prescp, const std::vector<HealthIssue> & nhealthIssues, const MedicalEncounter& nMed) noexcept
             : name(nName), id(nid), measuraments(nMeasure), prescriptions(prescp), healthIssues(nhealthIssues), encounter(nMed)
         {
         }
 
         template<typename T>
         requires SomeString<T>
-        explicit Patient(const T& nName)
+        explicit Patient(const T& nName) noexcept
             : name(nName)
         {
         }
 
+        //Copy Constructor
+        Patient(const Patient& other) noexcept;
+
+        // Move constructor
+        Patient(Patient&& other) noexcept;
+
+        Patient& operator=(Patient&& other) noexcept;
         
         void print() const noexcept;
 
@@ -87,7 +94,7 @@ namespace EHR
             return this->name == other.name;
         }
 
-        ~Patient() = default;
+        ~Patient() noexcept = default;
     };
     
 } // namespace EHR

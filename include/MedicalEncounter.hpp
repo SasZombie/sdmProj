@@ -1,6 +1,7 @@
 #pragma once
 #include <set>
 #include <iostream>
+#include <utility>
 #include "Doctor.hpp"
 #include "HealthIssue.hpp"
 
@@ -22,14 +23,20 @@ namespace EHR
         MedicalEncounter(const Doctor& doctor, const HealthIssue &issue, size_t nId = 0);
         MedicalEncounter(const std::set<Doctor>& nDoctors, const std::vector<HealthIssue> &issue, size_t nId = 0);
 
+        //Copy constructor
+        MedicalEncounter(const MedicalEncounter& other);
+
+        // Move constructor
+        MedicalEncounter(MedicalEncounter&& other) noexcept;
+        // Copy assignment operator
+        MedicalEncounter& operator=(const MedicalEncounter& other) noexcept;
+
         void addHealthIssue(const HealthIssue &issue) noexcept;
         void addDoctor(const Doctor& doctor) noexcept;
         size_t getId() const noexcept;
 
         void print() const noexcept;
-        // void setFinished() noexcept;
         bool isDoctor(const Doctor & doc) const noexcept;
-        // bool isFinished() const noexcept;
 
         auto operator<=>(const MedicalEncounter& other) const
         {
