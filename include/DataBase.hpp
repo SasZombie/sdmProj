@@ -22,15 +22,11 @@ namespace EHR
     public:
         DataBase(const std::string &schema);
     
-        sql::ResultSet* executeQuerry(const std::string& querry) const noexcept;
-        sql::ResultSet* executeQuerry(const sql::PreparedStatement *prep) const noexcept;
-        sql::PreparedStatement* prepareStatement(const std::string& querry) const noexcept;
         //Doctors
         Doctor createDoctor(const std::string& name) const noexcept;
         const std::set<Doctor> getDoctors() const noexcept;
         void addDoctor(const Doctor& doc) const noexcept;
         std::optional<Doctor> getDoctorByName(const std::string & name) const noexcept;
-        // std::optional<Doctor> getDoctorByID(const std::string & ID) const noexcept;
         void addDoctorToPatientEncounter(size_t patId, size_t docId, size_t issueId) const noexcept;
         void addDoctorEncounter(size_t docId, size_t issueId) const noexcept;
 
@@ -47,8 +43,6 @@ namespace EHR
         //Encounters
         MedicalEncounter createMedEncounter(const Doctor& docr) const noexcept;
         const std::vector<MedicalEncounter> getEncounters() const noexcept;
-        void addEncounter(const MedicalEncounter& med) const noexcept;
-        void uppdateEncounter(const MedicalEncounter& med) const noexcept;
         std::optional<MedicalEncounter> getEncounterById(size_t id) const noexcept;
         void signEncounter(size_t docID, size_t encID) const noexcept;
         void archiveEncounter(const std::string& pat) const noexcept;
