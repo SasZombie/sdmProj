@@ -1,24 +1,9 @@
 #include "../include/MainSystem.hpp"
-
-void EHR::MainSystem::patienVisits(Patient &p, const Doctor &doc) noexcept
+ 
+EHR::MainSystem::MainSystem(const std::string &schema)
+    : dataBase(schema)
 {
-    
-    if(!checkDoctor(doc))
-    {
-        std::cout << "This doctor is not part of our system\n";
-        return; 
-    }
-    MedicalEncounter newMed{doc};
 
-    p.addMedicalEncounter(newMed);
-    this->activeMedicalEncounters.emplace_back(newMed);
-    // dataBase.createMedicalEncounter
-    std::optional patient = this->dataBase.getPatientByName(p.getName());
-
-    if(patient.has_value())
-        this->dataBase.uppdatePatient(p);
-    else
-        this->dataBase.addPatient(p);
 }
 
 void EHR::MainSystem::patienVisits(const std::string &pName, const std::string &docName) noexcept
@@ -33,7 +18,6 @@ void EHR::MainSystem::patienVisits(const std::string &pName, const std::string &
 
 
     MedicalEncounter newMed = this->dataBase.createMedEncounter(doc);
-    this->activeMedicalEncounters.emplace_back(newMed);
 
     if(!checkPatient(pName))
     {
@@ -42,13 +26,12 @@ void EHR::MainSystem::patienVisits(const std::string &pName, const std::string &
     else
     {
         this->dataBase.uppdatePatient(pName, newMed.getId());
+        this->dataBase.archiveEncounter(pName);
     }
 
-
 }
-void EHR::MainSystem::addHealthIssue(const std::string &name, const std::string &issueName, IssueType iType) const noexcept
+void EHR::MainSystem::addHealthIssue(const std::string &name, const std::string &issueName, const std::string &docName, IssueType iType) const noexcept
 {
-    HealthIssue hi = this->dataBase.createHealthIssue(issueName, iType);
     std::optional<Patient> p = this->dataBase.getPatientByName(name);
 
     if(!p.has_value())
@@ -56,12 +39,19 @@ void EHR::MainSystem::addHealthIssue(const std::string &name, const std::string 
         std::cout << "This patient is not in our database! Make sure you call system.patientVisits before\n!";
         return;
     }
+    HealthIssue hi = this->dataBase.createHealthIssue(issueName, iType);
 
     if(p.value().addHealthIssue(hi))
     {
         this->dataBase.addHealthIssueToPatient(p.value(), hi);
     }
-
+    std::optional<Doctor> d = this->dataBase.getDoctorByName(docName);
+    if(!d.has_value())
+    {
+        std::cout << "This doctor is not in our database!\n";
+        return;
+    }
+    this->dataBase.addDoctorToPatientEncounter(p.value().getId(), d.value().getSignature(), hi.getId());
     this->dataBase.addHealthIssueToMedicalEncounter(p.value(), hi);
 }
 bool EHR::MainSystem::checkDoctor(const Doctor &doc) const noexcept
@@ -95,13 +85,7 @@ bool EHR::MainSystem::checkPatient(const std::string &name) const noexcept
     return false;
 }
 
-void EHR::MainSystem::deleteFromActive(const MedicalEncounter &med) noexcept
-{
-    auto it = std::find(this->activeMedicalEncounters.begin(), this->activeMedicalEncounters.end(), med);
-    if (it != this->activeMedicalEncounters.end()) {
-        this->activeMedicalEncounters.erase(it);
-    }
-}
+
 void EHR::MainSystem::addDoctor(const Doctor &doc) noexcept
 {
     if(checkDoctor(doc))
@@ -122,18 +106,7 @@ void EHR::MainSystem::addDoctor(const std::string &name) noexcept
     }
     dataBase.createDoctor(name);
 }
-void EHR::MainSystem::deleteMedEnc(const MedicalEncounter &med, Patient &p) noexcept
-{
-    this->deleteFromActive(med);
-    p.addMedicalEncounter(med);
-    
-}
-void EHR::MainSystem::archiveMedEnc(const MedicalEncounter &med, Patient &p) noexcept
-{
-    this->deleteFromActive(med);
-    this->archivedMedicalEncounters.emplace_back(p.getMedEnc());
-    p.addMedicalEncounter(med);
-}
+
 void EHR::MainSystem::healthServiciesPerformed(const std::string &patientName, const HealthServicies &healthServicies) const noexcept
 {   
 
@@ -146,19 +119,20 @@ void EHR::MainSystem::healthServiciesPerformed(const std::string &patientName, c
 
     const std::string desc = healthServicies.getDescritpion();  
 
-
     switch (healthServicies.getType())
     {
     case EHR::HealthServiceType::Measuraments :
         {
-            size_t id = this->dataBase.createAndGetPrescription(desc);
-            this->dataBase.addPrescription(p.value(), id);
+            this->dataBase.addMeasurement(p.value(), desc);
             break;
         }
     case EHR::HealthServiceType::Refferal :
     {
-        if(checkDoctor(Doctor{desc}))
+        std::optional<Doctor> doc = this->dataBase.getDoctorByName(desc);
+        if(doc.has_value())
         {
+            this->dataBase.addDoctorToPatientEncounter(p.value().getId(), doc.value().getSignature(), healthServicies.getIssue().getId());
+            this->dataBase.addDoctorEncounter(doc.value().getSignature(), p.value().getMedEnc().getId());
 
         }
         else
@@ -167,9 +141,11 @@ void EHR::MainSystem::healthServiciesPerformed(const std::string &patientName, c
 
     }
     case EHR::HealthServiceType::Prescription :
-        p.value().addPrescription(desc);
-        break;
-    
+        {
+            size_t id = this->dataBase.createAndGetPrescription(desc);
+            this->dataBase.addPrescription(p.value(), id);
+            break;
+        }   
     default:
         std::cerr << "Unreachable!!\n";
         exit(EXIT_FAILURE);
@@ -224,23 +200,7 @@ void EHR::MainSystem::print() const noexcept
     for(const auto &p : patients)
     {
         p.print();
-    }
-
-    // std::cout << "\n------------------------------\n";
-
-    // std::cout << "All archived Encounters are: \n";
-    // for(const auto &p : this->archivedMedicalEncounters)
-    // {
-    //     p.print();
-    // }
-
-    // std::cout << "\n------------------------------\n";
-
-    // std::cout << "All active Encounters are: \n";
-    // for(const auto &p : this->activeMedicalEncounters)
-    // {
-    //     p.print();
-    // }    
+    }   
 }
 
 void EHR::MainSystem::printPrescriptions(const std::string& pat) noexcept
@@ -272,6 +232,31 @@ void EHR::MainSystem::printPrescriptions(const std::string& pat) noexcept
     }
     
 }
+void EHR::MainSystem::signEncounterCorrect(size_t digitalSignature, const std::string& patName) const noexcept
+{   
+    std::optional<Patient> pat = this->dataBase.getPatientByName(patName);
+    if(!pat.has_value())
+    {
+        std::cout << "This Patient is not in our system\n";
+        return;
+    }
+    
+    size_t id = pat.value().getId();
+    this->dataBase.signEncounter(digitalSignature, id); 
+    this->dataBase.deleteEncounter(id); 
+}
+void EHR::MainSystem::signEncounterIncorrect(size_t digitalSignature, const std::string& patName) const noexcept
+{   
+    std::optional<Patient> pat = this->dataBase.getPatientByName(patName);
+    if(!pat.has_value())
+    {
+        std::cout << "This Patient is not in our system\n";
+        return;
+    }
+    
+    this->dataBase.signEncounter(digitalSignature, pat.value().getMedEnc().getId()); 
+}
+
 void EHR::MainSystem::viewPatientData(const Patient &pat, const Doctor &doc) const noexcept
 {
     if(pat.getMedEnc().isDoctor(doc))
@@ -283,9 +268,4 @@ void EHR::MainSystem::viewPatientData(const Patient &pat, const Doctor &doc) con
 void EHR::MainSystem::viewPatientData(const Patient &pat) const noexcept
 {
     pat.print();
-}
-
-EHR::MainSystem::~MainSystem()
-{
-
 }

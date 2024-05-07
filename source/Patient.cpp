@@ -63,7 +63,7 @@ void EHR::Patient::print() const noexcept
     std::cout << this->name << '\n';
     std::cout << "All encounters are: \n";
     this->encounter.print();
-
+    std::cout << "All issues of the patien are:\n";
     for(const auto & is : this->healthIssues)
     {
         std::cout << is.getName() << '\n';

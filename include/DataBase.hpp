@@ -20,7 +20,7 @@ namespace EHR
         std::set<Doctor> getAllDoctorsByID(const std::string &doctorIDs) const noexcept;
 
     public:
-        DataBase();
+        DataBase(const std::string &schema);
     
         //Doctors
         Doctor createDoctor(const std::string& name) const noexcept;
@@ -28,6 +28,9 @@ namespace EHR
         void addDoctor(const Doctor& doc) const noexcept;
         std::optional<Doctor> getDoctorByName(const std::string & name) const noexcept;
         // std::optional<Doctor> getDoctorByID(const std::string & ID) const noexcept;
+        void addDoctorToPatientEncounter(size_t patId, size_t docId, size_t issueId) const noexcept;
+        void addDoctorEncounter(size_t docId, size_t issueId) const noexcept;
+
 
         //Patients
         const std::set<Patient> getPatients() const noexcept;
@@ -44,6 +47,9 @@ namespace EHR
         void addEncounter(const MedicalEncounter& med) const noexcept;
         void uppdateEncounter(const MedicalEncounter& med) const noexcept;
         std::optional<MedicalEncounter> getEncounterById(size_t id) const noexcept;
+        void signEncounter(size_t docID, size_t encID) const noexcept;
+        void archiveEncounter(const std::string& pat) const noexcept;
+        void deleteEncounter(size_t patID) const noexcept;
 
 
         //HealthIssues

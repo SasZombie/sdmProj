@@ -1,7 +1,7 @@
 #include "../include/HealthServicies.hpp"
 
 
-EHR::HealthServicies::HealthServicies(const HealthServiceType type, const std::string &desc, const MedicalEncounter &nmed) 
+EHR::HealthServicies::HealthServicies(const HealthServiceType type, const std::string &desc, const HealthIssue &nmed) 
     : hsType(type), description(desc), med(nmed)
 {
 }
@@ -16,7 +16,7 @@ const std::string &EHR::HealthServicies::getDescritpion() const noexcept
     return this->description;
 }
 
-const EHR::MedicalEncounter & EHR::HealthServicies::getEncounter() const noexcept
+const EHR::HealthIssue & EHR::HealthServicies::getIssue() const noexcept
 {
     return this->med;
 }

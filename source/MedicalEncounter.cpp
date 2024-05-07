@@ -43,16 +43,8 @@ void EHR::MedicalEncounter::print() const noexcept
         std::cout << doc.getName() << ' ';
     }
     std::cout << "\n---------------------\n";
-    // for(const auto &hi : this->healthIssues)
-    // {
-    //     std::cout << hi. << ' ';
-    // }
 
 }
-// void EHR::MedicalEncounter::setFinished() noexcept
-// {
-//     this->finished = true;
-// }
 
 bool EHR::MedicalEncounter::isDoctor(const Doctor &doc) const noexcept
 {

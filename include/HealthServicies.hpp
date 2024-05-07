@@ -15,14 +15,14 @@ namespace EHR
         bool wasCompleted;
         HealthServiceType hsType;
         std::string description;
-        MedicalEncounter med;
+        HealthIssue med;
         
     public:
-        HealthServicies(const HealthServiceType type, const std::string &desc, const MedicalEncounter &med = {}); 
+        HealthServicies(const HealthServiceType type, const std::string &desc, const HealthIssue &med = {}); 
 
         HealthServiceType getType() const noexcept;
         const std::string & getDescritpion() const noexcept;
-        const MedicalEncounter & getEncounter() const noexcept;       
+        const HealthIssue & getIssue() const noexcept;       
 
         ~HealthServicies() = default;
     };
