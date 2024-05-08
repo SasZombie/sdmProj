@@ -1,32 +1,32 @@
 #include "../include/MedicalEncounter.hpp"
 
-EHR::MedicalEncounter::MedicalEncounter(const Doctor &doctor, const HealthIssue &issue, size_t nId)
+EHR::MedicalEncounter::MedicalEncounter(const Doctor &doctor, const HealthIssue &issue, size_t nId) noexcept
     : id(nId)
 {
     this->doctors.insert(doctor);
     this->healthIssues.emplace_back(issue);
 }
 
-EHR::MedicalEncounter::MedicalEncounter(const HealthIssue &issue, size_t nId)
+EHR::MedicalEncounter::MedicalEncounter(const HealthIssue &issue, size_t nId) noexcept
     : id(nId)
 {
     this->healthIssues.emplace_back(issue);
 }
 
 
-EHR::MedicalEncounter::MedicalEncounter(const Doctor &doctor, size_t nId)
+EHR::MedicalEncounter::MedicalEncounter(const Doctor &doctor, size_t nId) noexcept
     : id(nId)
 {
     this->doctors.insert(doctor);
 }
 
-EHR::MedicalEncounter::MedicalEncounter(const std::set<Doctor>& nDoctors, const std::vector<HealthIssue> &issue, size_t nId)
+EHR::MedicalEncounter::MedicalEncounter(const std::set<Doctor>& nDoctors, const std::vector<HealthIssue> &issue, size_t nId) noexcept
     :doctors(nDoctors), healthIssues(issue), id(nId)
 {
 
 }
 
-EHR::MedicalEncounter::MedicalEncounter(const MedicalEncounter& other)
+EHR::MedicalEncounter::MedicalEncounter(const MedicalEncounter& other) noexcept
     : doctors(other.doctors), healthIssues(other.healthIssues), id(other.id)
 {
 

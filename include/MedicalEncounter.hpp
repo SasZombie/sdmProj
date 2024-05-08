@@ -17,14 +17,14 @@ namespace EHR
         size_t id;
 
     public:
-        MedicalEncounter() = default;
-        MedicalEncounter(const Doctor& doctor, size_t nId = 0);
-        MedicalEncounter(const HealthIssue &issue, size_t nId = 0);
-        MedicalEncounter(const Doctor& doctor, const HealthIssue &issue, size_t nId = 0);
-        MedicalEncounter(const std::set<Doctor>& nDoctors, const std::vector<HealthIssue> &issue, size_t nId = 0);
+        MedicalEncounter() noexcept = default;
+        MedicalEncounter(const Doctor& doctor, size_t nId = 0) noexcept;
+        MedicalEncounter(const HealthIssue &issue, size_t nId = 0) noexcept;
+        MedicalEncounter(const Doctor& doctor, const HealthIssue &issue, size_t nId = 0) noexcept;
+        MedicalEncounter(const std::set<Doctor>& nDoctors, const std::vector<HealthIssue> &issue, size_t nId = 0) noexcept;
 
         //Copy constructor
-        MedicalEncounter(const MedicalEncounter& other);
+        MedicalEncounter(const MedicalEncounter& other) noexcept;
 
         // Move constructor
         MedicalEncounter(MedicalEncounter&& other) noexcept;

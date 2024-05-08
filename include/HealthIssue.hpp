@@ -18,11 +18,11 @@ namespace EHR
         std::string name;
         size_t id;
     public:
-        HealthIssue() = default;
+        HealthIssue() noexcept = default;
         
         template<typename T>
         requires SomeString<T>
-        HealthIssue(IssueType type, const T& nName, size_t nId = 0)
+        HealthIssue(IssueType type, const T& nName, size_t nId = 0) noexcept
             : issueType(type), name(nName), id(nId)
         {
         }

@@ -1,6 +1,6 @@
 #include "../include/MainSystem.hpp"
  
-EHR::MainSystem::MainSystem(const std::string &schema)
+EHR::MainSystem::MainSystem(const std::string &schema) noexcept
     : dataBase(schema)
 {
 

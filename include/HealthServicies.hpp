@@ -18,7 +18,7 @@ namespace EHR
         HealthIssue med;
         
     public:
-        HealthServicies(const HealthServiceType type, const std::string &desc, const HealthIssue &med = {}); 
+        HealthServicies(const HealthServiceType type, const std::string &desc, const HealthIssue &med = {}) noexcept; 
 
         HealthServiceType getType() const noexcept;
         const std::string & getDescritpion() const noexcept;

@@ -1,7 +1,7 @@
 #include "../include/DataBase.hpp"
 
 
-EHR::DataBase::DataBase(const std::string& schema)
+EHR::DataBase::DataBase(const std::string& schema) noexcept
 {
     con->setSchema(schema);
     con->setAutoCommit(true);

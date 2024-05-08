@@ -19,7 +19,7 @@ namespace EHR
         bool checkPatient(const std::string &name) const noexcept;
 
     public:
-        MainSystem(const std::string& schema);
+        MainSystem(const std::string& schema) noexcept;
         
         std::optional<EHR::Doctor> createAndGet(const std::string& name) const noexcept;
 

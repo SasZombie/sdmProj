@@ -13,7 +13,7 @@ namespace EHR
     public:
         template<typename T>
         requires SomeString<T>
-        explicit Doctor(const T& nName, size_t nId = 0)
+        explicit Doctor(const T& nName, size_t nId = 0) noexcept
             : name(nName), signature(nId)
         {   
         }

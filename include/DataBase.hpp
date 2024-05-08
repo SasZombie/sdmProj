@@ -20,7 +20,7 @@ namespace EHR
         std::set<Doctor> getAllDoctorsByID(const std::string &doctorIDs) const noexcept;
 
     public:
-        DataBase(const std::string &schema);
+        DataBase(const std::string &schema) noexcept;
     
         //Doctors
         Doctor createDoctor(const std::string& name) const noexcept;
