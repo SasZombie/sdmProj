@@ -15,6 +15,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/main.dir/source/MedicalEncounter.cpp.o.d"
   "CMakeFiles/main.dir/source/Patient.cpp.o"
   "CMakeFiles/main.dir/source/Patient.cpp.o.d"
+  "CMakeFiles/main.dir/source/UI.cpp.o"
+  "CMakeFiles/main.dir/source/UI.cpp.o.d"
   "build/main"
   "build/main.pdb"
 )

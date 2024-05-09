@@ -35,7 +35,7 @@ namespace EHR
         void addDoctor(const Doctor& doctor) noexcept;
         size_t getId() const noexcept;
 
-        void print() const noexcept;
+        std::string print() const noexcept;
         bool isDoctor(const Doctor & doc) const noexcept;
 
         auto operator<=>(const MedicalEncounter& other) const

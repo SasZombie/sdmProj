@@ -37,7 +37,7 @@ namespace EHR
         void addPatient(const Patient& pat) const noexcept;
         void uppdatePatient(const Patient& pat) const noexcept;
         void uppdatePatient(const std::string &name, size_t medEncId) const noexcept;
-        void uppdatePatientPrescription(const std::vector<size_t> &prescID) const noexcept;
+        void uppdatePatientPrescription(size_t prescID) const noexcept;
         std::optional<Patient> getPatientByName(const std::string & name) const noexcept;
 
         //Encounters
@@ -59,6 +59,7 @@ namespace EHR
         size_t createAndGetPrescription(const std::string & str) const noexcept;
         void addMeasurement(const Patient& pat, const std::string & str) const noexcept;
         void addPrescription(const Patient& pat, size_t prescID) const noexcept;
+
 
         ~DataBase();
     };

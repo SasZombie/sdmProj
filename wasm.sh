@@ -1,0 +1,1 @@
+/usr/lib/emscripten/em++ PatientViewData.cpp source/DataBase.cpp source/Doctor.cpp source/HealthIssue.cpp source/HealthServicies.cpp source/MainSystem.cpp source/MedicalEncounter.cpp source/Patient.cpp -std=c++20 -o PatientViewData.js -L/usr/lib64/ -lmysqlcppconn -s EXPORTED_FUNCTIONS="['_greet']" -s EXPORTED_RUNTIME_METHODS='["ccall", "cwrap"]' 

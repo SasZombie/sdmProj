@@ -2,7 +2,6 @@
 #include <iostream>
 #include <algorithm>
 #include <unordered_set>
-#include "Patient.hpp"
 #include "HealthServicies.hpp"
 #include "DataBase.hpp"
 
@@ -31,14 +30,15 @@ namespace EHR
         void addHealthIssue(const std::string& name, const std::string &docName, const std::string &issueName, IssueType iType) const noexcept;
 
 
-        void viewPatientData(const Patient &pat, const Doctor& doc) const noexcept;
-        void viewPatientData(const Patient &pat) const noexcept;
+        void viewPatientData(const std::string& patName, const std::string& docName) const noexcept;
+        std::string viewPatientData(const std::string &pat) const noexcept;
         void healthServiciesPerformed(const std::string &patien, const HealthServicies &healthServicies) const noexcept;
 
         void signEncounter(const Doctor& doc, size_t pass, const MedicalEncounter &enc) noexcept;
         void print() const noexcept;
 
-        void printPrescriptions(const std::string& pat) noexcept;
+        void changePrescriptionStatus(size_t presc) noexcept;
+        std::vector<Prescription> printPrescriptions(const std::string& pat) const noexcept;
         void signEncounterCorrect(size_t digitalSignature, const std::string& pat) const noexcept;
         void signEncounterIncorrect(size_t digitalSignature, const std::string& pat) const noexcept;
 

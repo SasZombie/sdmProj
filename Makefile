@@ -57,10 +57,10 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/sas/Coding/sdmProj
+CMAKE_SOURCE_DIR = /home/saszombie/Coding/sdmProj2
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/sas/Coding/sdmProj
+CMAKE_BINARY_DIR = /home/saszombie/Coding/sdmProj2
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -87,9 +87,9 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/sas/Coding/sdmProj/CMakeFiles /home/sas/Coding/sdmProj//CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/saszombie/Coding/sdmProj2/CMakeFiles /home/saszombie/Coding/sdmProj2//CMakeFiles/progress.marks
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/sas/Coding/sdmProj/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/saszombie/Coding/sdmProj2/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -129,6 +129,43 @@ main/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/build
 .PHONY : main/fast
 
+#=============================================================================
+# Target rules for targets named PatientData
+
+# Build rule for target.
+PatientData: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 PatientData
+.PHONY : PatientData
+
+# fast build rule for target.
+PatientData/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/PatientData.dir/build.make CMakeFiles/PatientData.dir/build
+.PHONY : PatientData/fast
+
+PatientViewData.o: PatientViewData.cpp.o
+.PHONY : PatientViewData.o
+
+# target to build an object file
+PatientViewData.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/PatientData.dir/build.make CMakeFiles/PatientData.dir/PatientViewData.cpp.o
+.PHONY : PatientViewData.cpp.o
+
+PatientViewData.i: PatientViewData.cpp.i
+.PHONY : PatientViewData.i
+
+# target to preprocess a source file
+PatientViewData.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/PatientData.dir/build.make CMakeFiles/PatientData.dir/PatientViewData.cpp.i
+.PHONY : PatientViewData.cpp.i
+
+PatientViewData.s: PatientViewData.cpp.s
+.PHONY : PatientViewData.s
+
+# target to generate assembly for a file
+PatientViewData.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/PatientData.dir/build.make CMakeFiles/PatientData.dir/PatientViewData.cpp.s
+.PHONY : PatientViewData.cpp.s
+
 main.o: main.cpp.o
 .PHONY : main.o
 
@@ -159,6 +196,7 @@ source/DataBase.o: source/DataBase.cpp.o
 # target to build an object file
 source/DataBase.cpp.o:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/source/DataBase.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/PatientData.dir/build.make CMakeFiles/PatientData.dir/source/DataBase.cpp.o
 .PHONY : source/DataBase.cpp.o
 
 source/DataBase.i: source/DataBase.cpp.i
@@ -167,6 +205,7 @@ source/DataBase.i: source/DataBase.cpp.i
 # target to preprocess a source file
 source/DataBase.cpp.i:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/source/DataBase.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/PatientData.dir/build.make CMakeFiles/PatientData.dir/source/DataBase.cpp.i
 .PHONY : source/DataBase.cpp.i
 
 source/DataBase.s: source/DataBase.cpp.s
@@ -175,6 +214,7 @@ source/DataBase.s: source/DataBase.cpp.s
 # target to generate assembly for a file
 source/DataBase.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/source/DataBase.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/PatientData.dir/build.make CMakeFiles/PatientData.dir/source/DataBase.cpp.s
 .PHONY : source/DataBase.cpp.s
 
 source/Doctor.o: source/Doctor.cpp.o
@@ -183,6 +223,7 @@ source/Doctor.o: source/Doctor.cpp.o
 # target to build an object file
 source/Doctor.cpp.o:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/source/Doctor.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/PatientData.dir/build.make CMakeFiles/PatientData.dir/source/Doctor.cpp.o
 .PHONY : source/Doctor.cpp.o
 
 source/Doctor.i: source/Doctor.cpp.i
@@ -191,6 +232,7 @@ source/Doctor.i: source/Doctor.cpp.i
 # target to preprocess a source file
 source/Doctor.cpp.i:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/source/Doctor.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/PatientData.dir/build.make CMakeFiles/PatientData.dir/source/Doctor.cpp.i
 .PHONY : source/Doctor.cpp.i
 
 source/Doctor.s: source/Doctor.cpp.s
@@ -199,6 +241,7 @@ source/Doctor.s: source/Doctor.cpp.s
 # target to generate assembly for a file
 source/Doctor.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/source/Doctor.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/PatientData.dir/build.make CMakeFiles/PatientData.dir/source/Doctor.cpp.s
 .PHONY : source/Doctor.cpp.s
 
 source/HealthIssue.o: source/HealthIssue.cpp.o
@@ -207,6 +250,7 @@ source/HealthIssue.o: source/HealthIssue.cpp.o
 # target to build an object file
 source/HealthIssue.cpp.o:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/source/HealthIssue.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/PatientData.dir/build.make CMakeFiles/PatientData.dir/source/HealthIssue.cpp.o
 .PHONY : source/HealthIssue.cpp.o
 
 source/HealthIssue.i: source/HealthIssue.cpp.i
@@ -215,6 +259,7 @@ source/HealthIssue.i: source/HealthIssue.cpp.i
 # target to preprocess a source file
 source/HealthIssue.cpp.i:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/source/HealthIssue.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/PatientData.dir/build.make CMakeFiles/PatientData.dir/source/HealthIssue.cpp.i
 .PHONY : source/HealthIssue.cpp.i
 
 source/HealthIssue.s: source/HealthIssue.cpp.s
@@ -223,6 +268,7 @@ source/HealthIssue.s: source/HealthIssue.cpp.s
 # target to generate assembly for a file
 source/HealthIssue.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/source/HealthIssue.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/PatientData.dir/build.make CMakeFiles/PatientData.dir/source/HealthIssue.cpp.s
 .PHONY : source/HealthIssue.cpp.s
 
 source/HealthServicies.o: source/HealthServicies.cpp.o
@@ -231,6 +277,7 @@ source/HealthServicies.o: source/HealthServicies.cpp.o
 # target to build an object file
 source/HealthServicies.cpp.o:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/source/HealthServicies.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/PatientData.dir/build.make CMakeFiles/PatientData.dir/source/HealthServicies.cpp.o
 .PHONY : source/HealthServicies.cpp.o
 
 source/HealthServicies.i: source/HealthServicies.cpp.i
@@ -239,6 +286,7 @@ source/HealthServicies.i: source/HealthServicies.cpp.i
 # target to preprocess a source file
 source/HealthServicies.cpp.i:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/source/HealthServicies.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/PatientData.dir/build.make CMakeFiles/PatientData.dir/source/HealthServicies.cpp.i
 .PHONY : source/HealthServicies.cpp.i
 
 source/HealthServicies.s: source/HealthServicies.cpp.s
@@ -247,6 +295,7 @@ source/HealthServicies.s: source/HealthServicies.cpp.s
 # target to generate assembly for a file
 source/HealthServicies.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/source/HealthServicies.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/PatientData.dir/build.make CMakeFiles/PatientData.dir/source/HealthServicies.cpp.s
 .PHONY : source/HealthServicies.cpp.s
 
 source/MainSystem.o: source/MainSystem.cpp.o
@@ -255,6 +304,7 @@ source/MainSystem.o: source/MainSystem.cpp.o
 # target to build an object file
 source/MainSystem.cpp.o:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/source/MainSystem.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/PatientData.dir/build.make CMakeFiles/PatientData.dir/source/MainSystem.cpp.o
 .PHONY : source/MainSystem.cpp.o
 
 source/MainSystem.i: source/MainSystem.cpp.i
@@ -263,6 +313,7 @@ source/MainSystem.i: source/MainSystem.cpp.i
 # target to preprocess a source file
 source/MainSystem.cpp.i:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/source/MainSystem.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/PatientData.dir/build.make CMakeFiles/PatientData.dir/source/MainSystem.cpp.i
 .PHONY : source/MainSystem.cpp.i
 
 source/MainSystem.s: source/MainSystem.cpp.s
@@ -271,6 +322,7 @@ source/MainSystem.s: source/MainSystem.cpp.s
 # target to generate assembly for a file
 source/MainSystem.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/source/MainSystem.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/PatientData.dir/build.make CMakeFiles/PatientData.dir/source/MainSystem.cpp.s
 .PHONY : source/MainSystem.cpp.s
 
 source/MedicalEncounter.o: source/MedicalEncounter.cpp.o
@@ -279,6 +331,7 @@ source/MedicalEncounter.o: source/MedicalEncounter.cpp.o
 # target to build an object file
 source/MedicalEncounter.cpp.o:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/source/MedicalEncounter.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/PatientData.dir/build.make CMakeFiles/PatientData.dir/source/MedicalEncounter.cpp.o
 .PHONY : source/MedicalEncounter.cpp.o
 
 source/MedicalEncounter.i: source/MedicalEncounter.cpp.i
@@ -287,6 +340,7 @@ source/MedicalEncounter.i: source/MedicalEncounter.cpp.i
 # target to preprocess a source file
 source/MedicalEncounter.cpp.i:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/source/MedicalEncounter.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/PatientData.dir/build.make CMakeFiles/PatientData.dir/source/MedicalEncounter.cpp.i
 .PHONY : source/MedicalEncounter.cpp.i
 
 source/MedicalEncounter.s: source/MedicalEncounter.cpp.s
@@ -295,6 +349,7 @@ source/MedicalEncounter.s: source/MedicalEncounter.cpp.s
 # target to generate assembly for a file
 source/MedicalEncounter.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/source/MedicalEncounter.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/PatientData.dir/build.make CMakeFiles/PatientData.dir/source/MedicalEncounter.cpp.s
 .PHONY : source/MedicalEncounter.cpp.s
 
 source/Patient.o: source/Patient.cpp.o
@@ -303,6 +358,7 @@ source/Patient.o: source/Patient.cpp.o
 # target to build an object file
 source/Patient.cpp.o:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/source/Patient.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/PatientData.dir/build.make CMakeFiles/PatientData.dir/source/Patient.cpp.o
 .PHONY : source/Patient.cpp.o
 
 source/Patient.i: source/Patient.cpp.i
@@ -311,6 +367,7 @@ source/Patient.i: source/Patient.cpp.i
 # target to preprocess a source file
 source/Patient.cpp.i:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/source/Patient.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/PatientData.dir/build.make CMakeFiles/PatientData.dir/source/Patient.cpp.i
 .PHONY : source/Patient.cpp.i
 
 source/Patient.s: source/Patient.cpp.s
@@ -319,7 +376,35 @@ source/Patient.s: source/Patient.cpp.s
 # target to generate assembly for a file
 source/Patient.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/source/Patient.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/PatientData.dir/build.make CMakeFiles/PatientData.dir/source/Patient.cpp.s
 .PHONY : source/Patient.cpp.s
+
+source/UI.o: source/UI.cpp.o
+.PHONY : source/UI.o
+
+# target to build an object file
+source/UI.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/source/UI.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/PatientData.dir/build.make CMakeFiles/PatientData.dir/source/UI.cpp.o
+.PHONY : source/UI.cpp.o
+
+source/UI.i: source/UI.cpp.i
+.PHONY : source/UI.i
+
+# target to preprocess a source file
+source/UI.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/source/UI.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/PatientData.dir/build.make CMakeFiles/PatientData.dir/source/UI.cpp.i
+.PHONY : source/UI.cpp.i
+
+source/UI.s: source/UI.cpp.s
+.PHONY : source/UI.s
+
+# target to generate assembly for a file
+source/UI.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/source/UI.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/PatientData.dir/build.make CMakeFiles/PatientData.dir/source/UI.cpp.s
+.PHONY : source/UI.cpp.s
 
 # Help Target
 help:
@@ -329,7 +414,11 @@ help:
 	@echo "... depend"
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
+	@echo "... PatientData"
 	@echo "... main"
+	@echo "... PatientViewData.o"
+	@echo "... PatientViewData.i"
+	@echo "... PatientViewData.s"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"
@@ -354,6 +443,9 @@ help:
 	@echo "... source/Patient.o"
 	@echo "... source/Patient.i"
 	@echo "... source/Patient.s"
+	@echo "... source/UI.o"
+	@echo "... source/UI.i"
+	@echo "... source/UI.s"
 .PHONY : help
 
 

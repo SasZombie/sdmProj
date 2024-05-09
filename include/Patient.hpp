@@ -66,7 +66,7 @@ namespace EHR
 
         Patient& operator=(Patient&& other) noexcept;
         
-        void print() const noexcept;
+        std::string print() const noexcept;
 
         void addMedicalEncounter(const MedicalEncounter& medEnc) noexcept;
         void addPrescription(const std::string &prescriotion) noexcept;

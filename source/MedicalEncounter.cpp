@@ -59,14 +59,15 @@ size_t EHR::MedicalEncounter::getId() const noexcept
 {
     return this->id;
 }
-void EHR::MedicalEncounter::print() const noexcept
+std::string EHR::MedicalEncounter::print() const noexcept
 {
+    std::string returned;
     for(const auto &doc : doctors)
     {
-        std::cout << doc.getName() << ' ';
+        returned += doc.getName() + ' ';
     }
-    std::cout << "\n---------------------\n";
-
+    returned +="\n---------------------\n";
+    return returned;
 }
 
 bool EHR::MedicalEncounter::isDoctor(const Doctor &doc) const noexcept

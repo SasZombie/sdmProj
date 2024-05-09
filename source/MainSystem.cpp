@@ -1,4 +1,5 @@
 #include "../include/MainSystem.hpp"
+
  
 EHR::MainSystem::MainSystem(const std::string &schema) noexcept
     : dataBase(schema)
@@ -34,7 +35,7 @@ void EHR::MainSystem::addHealthIssue(const std::string &name, const std::string 
 
     if(!p.has_value())
     {
-        std::cout << "This patient is not in our database! Make sure you call system.patientVisits before\n!";
+        std::cout << "This patient is not in our database! Make sure you call system.patientVisits before!\n";
         return;
     }
     HealthIssue hi = this->dataBase.createHealthIssue(issueName, iType);
@@ -111,13 +112,18 @@ void EHR::MainSystem::healthServiciesPerformed(const std::string &patientName, c
     std::optional<Patient> p = this->dataBase.getPatientByName(patientName);
     if(!p.has_value())
     {
-        std::cout << "Cannot apply health Servicies because Patient isnt in our system!\n";
+        std::cout << "Cannot apply health Servicies because " + patientName + " isnt in our system!\n";
         return;
     }
 
+    HealthServicies serv{healthServicies.getType(), healthServicies.getDescritpion(),
+        this->dataBase.createHealthIssue(healthServicies.getIssue().getName(), healthServicies.getIssue().getType())};
+
+   
+
     const std::string desc = healthServicies.getDescritpion();  
 
-    switch (healthServicies.getType())
+    switch (serv.getType())
     {
     case EHR::HealthServiceType::Measuraments :
         {
@@ -129,7 +135,7 @@ void EHR::MainSystem::healthServiciesPerformed(const std::string &patientName, c
         std::optional<Doctor> doc = this->dataBase.getDoctorByName(desc);
         if(doc.has_value())
         {
-            this->dataBase.addDoctorToPatientEncounter(p.value().getId(), doc.value().getSignature(), healthServicies.getIssue().getId());
+            this->dataBase.addDoctorToPatientEncounter(p.value().getId(), doc.value().getSignature(), serv.getIssue().getId());
             this->dataBase.addDoctorEncounter(doc.value().getSignature(), p.value().getMedEnc().getId());
 
         }
@@ -170,15 +176,6 @@ void EHR::MainSystem::signEncounter(const Doctor &doc, size_t pass, const Medica
         return;
     }
 
-
-    // for(auto & encounters : this->activeMedicalEncounters)
-    // {
-    //     if(encounters == enc)
-    //     {
-    //         encounters.setFinished();
-    //     }
-    // }
-
 }
 
 void EHR::MainSystem::print() const noexcept
@@ -188,7 +185,7 @@ void EHR::MainSystem::print() const noexcept
     std::cout << "All doctors are: \n";
     for(const auto &d : doctors)
     {
-        std::cout << d.getName() << ' ' << d.getSignature() << '\n';
+        std::cout << d.getName() + ' ' + std::to_string(d.getSignature()) + '\n';
     }
 
     std::cout << "\n------------------------------\n";
@@ -200,34 +197,22 @@ void EHR::MainSystem::print() const noexcept
         p.print();
     }   
 }
+void EHR::MainSystem::changePrescriptionStatus(size_t presc) noexcept
+{
+    this->dataBase.uppdatePatientPrescription(presc);
+}
 
-void EHR::MainSystem::printPrescriptions(const std::string& pat) noexcept
+std::vector<EHR::Prescription> EHR::MainSystem::printPrescriptions(const std::string &pat) const noexcept
 {
 
     std::optional opt = dataBase.getPatientByName(pat);
     if(!opt.has_value())
     {
-        std::cout << "Cannot find patient with name " << pat << '\n';
-        return;
+        std::cout << "Cannot find patient with name " + pat + '\n';
+        return {};
     }
 
-    Patient p = opt.value();
-
-    for(const auto & prep : p.getPrescriptions())
-    {
-        std::cout << prep.name << ' ' << (prep.isCompleted ? "Taken" : "Not Taken") << '\n';
-    }
-
-    std::cout << "Please Specify witch prescriptions to change status\n";
-
-    std::vector<size_t> buff;
-    size_t a;
-    std::cin >> a;
-    buff.push_back(a);
-    //Insert Gui to add to buffer
-
-    this->dataBase.uppdatePatientPrescription(buff);
-    
+    return opt.value().getPrescriptions();
 }
 void EHR::MainSystem::signEncounterCorrect(size_t digitalSignature, const std::string& patName) const noexcept
 {   
@@ -254,15 +239,35 @@ void EHR::MainSystem::signEncounterIncorrect(size_t digitalSignature, const std:
     this->dataBase.signEncounter(digitalSignature, pat.value().getMedEnc().getId()); 
 }
 
-void EHR::MainSystem::viewPatientData(const Patient &pat, const Doctor &doc) const noexcept
+
+void EHR::MainSystem::viewPatientData(const std::string &patName, const std::string &docName) const noexcept
 {
-    if(pat.getMedEnc().isDoctor(doc))
-        pat.print();
+    std::optional<Doctor> doc = this->dataBase.getDoctorByName(docName);
+    if(!doc.has_value())
+    {
+        std::cout << "Doctor not in system\n";
+        return;
+    }
+
+    std::optional<Patient> pat = this->dataBase.getPatientByName(patName);
+    if(!pat.has_value())
+    {
+        std::cout << "Patient not in system!\n";
+        return;
+    }
+
+    if(pat.value().getMedEnc().isDoctor(doc.value()))
+        pat.value().print();
     else
         std::cout << "You are not allowed to see this patient's data!\n";
 }
 
-void EHR::MainSystem::viewPatientData(const Patient &pat) const noexcept
+std::string EHR::MainSystem::viewPatientData(const std::string &patient) const noexcept
 {
-    pat.print();
+    std::optional<Patient> pat = this->dataBase.getPatientByName(patient);
+    if(!pat.has_value())
+    {
+        return "Not in system\n";
+    }
+    return pat.value().print();
 }

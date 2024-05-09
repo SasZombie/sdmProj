@@ -55,7 +55,7 @@ void EHR::Patient::addPrescription(const std::string &prescriotion) noexcept
     {
         if (std::find(notGood.begin(), notGood.end(), elem.name) != notGood.end())
         {
-            std::cout << "Cannot add " << prescriotion << " because it is contradicting with " << elem.name << '\n';
+            std::cout << "Cannot add " + prescriotion + " because it is contradicting with " + elem.name + '\n';
             return;
         }
     }
@@ -63,7 +63,7 @@ void EHR::Patient::addPrescription(const std::string &prescriotion) noexcept
     {
         if (std::find(notGood.begin(), notGood.end(), elem.getName()) != notGood.end())
         {
-            std::cout << "Cannot add " << prescriotion << " because it is contradicting with " << elem.getName() << '\n';
+            std::cout << "Cannot add " + prescriotion + " because it is contradicting with " + elem.getName() + '\n';
             return;
         }
     }
@@ -78,27 +78,19 @@ void EHR::Patient::addMeasurament(const std::string &measure) noexcept
 void EHR::Patient::addDoctor(const Doctor &doc, MedicalEncounter &med) noexcept
 {
     this->encounter.addDoctor(doc);
-    // med.addDoctor(doc);
-
-    // for (size_t i = 0; i < this->encounters.size(); ++i)
-    // {
-    //     if (med == encounters.at(i))
-    //     {
-    //         encounters.at(i) = med;
-    //     }
-    // }
 }
-void EHR::Patient::print() const noexcept
+
+std::string EHR::Patient::print() const noexcept
 {
-    std::cout << this->name << '\n';
-    std::cout << "All encounters are: \n";
-    this->encounter.print();
-    std::cout << "All issues of the patien are:\n";
+    std::string retunred = this->name + '\n';
+    retunred += "All encounters are: \n";
+    retunred += this->encounter.print();
+    retunred += "All issues of the patien are:\n";
     for(const auto & is : this->healthIssues)
     {
-        std::cout << is.getName() << '\n';
+        retunred += is.getName() + '\n';
     }
-
+    return retunred;
 }
 
 const EHR::MedicalEncounter &EHR::Patient::getMedEnc() const noexcept

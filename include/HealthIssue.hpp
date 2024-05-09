@@ -28,6 +28,7 @@ namespace EHR
         }
 
         const std::string & getName() const noexcept;
+        IssueType getType() const noexcept;
         size_t getId() const noexcept;
         
         auto operator<=>(const HealthIssue& other) const
