@@ -16,8 +16,7 @@ const server = http.createServer((req, res) => {
                 res.end(data);
             }
         });
-    } else if (req.url === '/execute-cpp-program' && req.method === 'POST') {
-        // Handle POST request to execute C++ program
+    } else if (req.url === '/ViewData' && req.method === 'POST') {
         let body = '';
         req.on('data', chunk => {
             body += chunk.toString();
@@ -30,9 +29,9 @@ const server = http.createServer((req, res) => {
                         res.writeHead(500, { 'Content-Type': 'text/plain' });
                         res.end('Internal Server Error');
                     } else {
-                        const outputWithBreaks = stdout.replace(/\n/g, '<br>'); // Replace newline characters with <br> tags
+                        const outputWithBreaks = stdout.replace(/\n/g, '<br />'); // Replace newline characters with <br> tags
 
-                        res.writeHead(200, { 'Content-Type': 'text/plain' });
+                        res.writeHead(200, { 'Content-Type': 'application/json' });
                         res.end(JSON.stringify({ output: outputWithBreaks }));
                     }
                 });

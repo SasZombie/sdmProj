@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Call C++ Program with Argument</title>
+    <title>Pacient</title>
 </head>
 <body>
-    <h1>Call C++ Program with Argument</h1>
+    <h1>View Your Data:</h1>
     <form id="myForm">
-        <label for="argument">Enter an argument:</label>
+        <label for="argument">Name:</label>
         <input type="text" id="argument" name="argument">
         <button type="submit">Submit</button>
     </form>
@@ -21,21 +21,22 @@
 
             const argument = document.getElementById('argument').value;
 
-            // Send argument to Node.js script using XMLHttpRequest
-            const xhr = new XMLHttpRequest();
-            xhr.open('POST', '/execute-cpp-program', true);
-            xhr.setRequestHeader('Content-Type', 'application/json');
-            xhr.onreadystatechange = function () {
-                if (xhr.readyState === XMLHttpRequest.DONE) {
-                    if (xhr.status === 200) {
-                        const response = JSON.parse(xhr.responseText);
-                        document.getElementById('output').textContent = response.output;
-                    } else {
-                        console.error('Error:', xhr.status, xhr.statusText);
-                    }
-                }
-            };
-            xhr.send(JSON.stringify({ argument }));
+            // Send argument to server using Fetch API
+            fetch('/ViewData', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ argument })
+            })
+            .then(response => response.json())
+            .then(data => {
+                const outputDiv = document.getElementById('output');
+                outputDiv.innerHTML = data.output;
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
         });
     </script>
 </body>
