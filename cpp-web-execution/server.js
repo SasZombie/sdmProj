@@ -29,7 +29,7 @@ const server = http.createServer((req, res) => {
                         res.writeHead(500, { 'Content-Type': 'text/plain' });
                         res.end('Internal Server Error');
                     } else {
-                        const outputWithBreaks = stdout.replace(/\n/g, '<br />'); // Replace newline characters with <br> tags
+                        const outputWithBreaks = stdout.replace(/\n/g, '<br>'); // Replace newline characters with <br> tags
 
                         res.writeHead(200, { 'Content-Type': 'application/json' });
                         res.end(JSON.stringify({ output: outputWithBreaks }));
@@ -38,27 +38,6 @@ const server = http.createServer((req, res) => {
             } catch (error) {
                 res.writeHead(400, { 'Content-Type': 'text/plain' });
                 res.end('Bad Request');
-            }
-        });
-    } else {
-        // Handle requests for other resources (e.g., CSS, JavaScript files)
-        const resourcePath = path.join(__dirname, req.url);
-        fs.readFile(resourcePath, (err, data) => {
-            if (err) {
-                res.writeHead(404, { 'Content-Type': 'text/plain' });
-                res.end('Not Found');
-            } else {
-                const ext = path.extname(req.url).toLowerCase();
-                let contentType = 'text/plain';
-                if (ext === '.html') {
-                    contentType = 'text/html';
-                } else if (ext === '.css') {
-                    contentType = 'text/css';
-                } else if (ext === '.js') {
-                    contentType = 'text/javascript';
-                }
-                res.writeHead(200, { 'Content-Type': contentType });
-                res.end(data);
             }
         });
     }

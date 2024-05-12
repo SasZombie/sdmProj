@@ -9,7 +9,6 @@ namespace EHR
     private:
         std::string name;
         size_t signature;             
-        static inline size_t globalID = 0;
     public:
         template<typename T>
         requires SomeString<T>

@@ -53,10 +53,10 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/saszombie/Coding/sdmProj2
+CMAKE_SOURCE_DIR = /home/saszombie/Coding/sdmProj
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/saszombie/Coding/sdmProj2
+CMAKE_BINARY_DIR = /home/saszombie/Coding/sdmProj
 
 # Include any dependencies generated for this target.
 include CMakeFiles/PatientData.dir/depend.make
@@ -72,128 +72,128 @@ include CMakeFiles/PatientData.dir/flags.make
 CMakeFiles/PatientData.dir/PatientViewData.cpp.o: CMakeFiles/PatientData.dir/flags.make
 CMakeFiles/PatientData.dir/PatientViewData.cpp.o: PatientViewData.cpp
 CMakeFiles/PatientData.dir/PatientViewData.cpp.o: CMakeFiles/PatientData.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/saszombie/Coding/sdmProj2/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/PatientData.dir/PatientViewData.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/PatientData.dir/PatientViewData.cpp.o -MF CMakeFiles/PatientData.dir/PatientViewData.cpp.o.d -o CMakeFiles/PatientData.dir/PatientViewData.cpp.o -c /home/saszombie/Coding/sdmProj2/PatientViewData.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/saszombie/Coding/sdmProj/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/PatientData.dir/PatientViewData.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/PatientData.dir/PatientViewData.cpp.o -MF CMakeFiles/PatientData.dir/PatientViewData.cpp.o.d -o CMakeFiles/PatientData.dir/PatientViewData.cpp.o -c /home/saszombie/Coding/sdmProj/PatientViewData.cpp
 
 CMakeFiles/PatientData.dir/PatientViewData.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/PatientData.dir/PatientViewData.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/saszombie/Coding/sdmProj2/PatientViewData.cpp > CMakeFiles/PatientData.dir/PatientViewData.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/saszombie/Coding/sdmProj/PatientViewData.cpp > CMakeFiles/PatientData.dir/PatientViewData.cpp.i
 
 CMakeFiles/PatientData.dir/PatientViewData.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/PatientData.dir/PatientViewData.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/saszombie/Coding/sdmProj2/PatientViewData.cpp -o CMakeFiles/PatientData.dir/PatientViewData.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/saszombie/Coding/sdmProj/PatientViewData.cpp -o CMakeFiles/PatientData.dir/PatientViewData.cpp.s
 
 CMakeFiles/PatientData.dir/source/DataBase.cpp.o: CMakeFiles/PatientData.dir/flags.make
 CMakeFiles/PatientData.dir/source/DataBase.cpp.o: source/DataBase.cpp
 CMakeFiles/PatientData.dir/source/DataBase.cpp.o: CMakeFiles/PatientData.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/saszombie/Coding/sdmProj2/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/PatientData.dir/source/DataBase.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/PatientData.dir/source/DataBase.cpp.o -MF CMakeFiles/PatientData.dir/source/DataBase.cpp.o.d -o CMakeFiles/PatientData.dir/source/DataBase.cpp.o -c /home/saszombie/Coding/sdmProj2/source/DataBase.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/saszombie/Coding/sdmProj/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/PatientData.dir/source/DataBase.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/PatientData.dir/source/DataBase.cpp.o -MF CMakeFiles/PatientData.dir/source/DataBase.cpp.o.d -o CMakeFiles/PatientData.dir/source/DataBase.cpp.o -c /home/saszombie/Coding/sdmProj/source/DataBase.cpp
 
 CMakeFiles/PatientData.dir/source/DataBase.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/PatientData.dir/source/DataBase.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/saszombie/Coding/sdmProj2/source/DataBase.cpp > CMakeFiles/PatientData.dir/source/DataBase.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/saszombie/Coding/sdmProj/source/DataBase.cpp > CMakeFiles/PatientData.dir/source/DataBase.cpp.i
 
 CMakeFiles/PatientData.dir/source/DataBase.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/PatientData.dir/source/DataBase.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/saszombie/Coding/sdmProj2/source/DataBase.cpp -o CMakeFiles/PatientData.dir/source/DataBase.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/saszombie/Coding/sdmProj/source/DataBase.cpp -o CMakeFiles/PatientData.dir/source/DataBase.cpp.s
 
 CMakeFiles/PatientData.dir/source/Doctor.cpp.o: CMakeFiles/PatientData.dir/flags.make
 CMakeFiles/PatientData.dir/source/Doctor.cpp.o: source/Doctor.cpp
 CMakeFiles/PatientData.dir/source/Doctor.cpp.o: CMakeFiles/PatientData.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/saszombie/Coding/sdmProj2/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/PatientData.dir/source/Doctor.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/PatientData.dir/source/Doctor.cpp.o -MF CMakeFiles/PatientData.dir/source/Doctor.cpp.o.d -o CMakeFiles/PatientData.dir/source/Doctor.cpp.o -c /home/saszombie/Coding/sdmProj2/source/Doctor.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/saszombie/Coding/sdmProj/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/PatientData.dir/source/Doctor.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/PatientData.dir/source/Doctor.cpp.o -MF CMakeFiles/PatientData.dir/source/Doctor.cpp.o.d -o CMakeFiles/PatientData.dir/source/Doctor.cpp.o -c /home/saszombie/Coding/sdmProj/source/Doctor.cpp
 
 CMakeFiles/PatientData.dir/source/Doctor.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/PatientData.dir/source/Doctor.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/saszombie/Coding/sdmProj2/source/Doctor.cpp > CMakeFiles/PatientData.dir/source/Doctor.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/saszombie/Coding/sdmProj/source/Doctor.cpp > CMakeFiles/PatientData.dir/source/Doctor.cpp.i
 
 CMakeFiles/PatientData.dir/source/Doctor.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/PatientData.dir/source/Doctor.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/saszombie/Coding/sdmProj2/source/Doctor.cpp -o CMakeFiles/PatientData.dir/source/Doctor.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/saszombie/Coding/sdmProj/source/Doctor.cpp -o CMakeFiles/PatientData.dir/source/Doctor.cpp.s
 
 CMakeFiles/PatientData.dir/source/HealthIssue.cpp.o: CMakeFiles/PatientData.dir/flags.make
 CMakeFiles/PatientData.dir/source/HealthIssue.cpp.o: source/HealthIssue.cpp
 CMakeFiles/PatientData.dir/source/HealthIssue.cpp.o: CMakeFiles/PatientData.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/saszombie/Coding/sdmProj2/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/PatientData.dir/source/HealthIssue.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/PatientData.dir/source/HealthIssue.cpp.o -MF CMakeFiles/PatientData.dir/source/HealthIssue.cpp.o.d -o CMakeFiles/PatientData.dir/source/HealthIssue.cpp.o -c /home/saszombie/Coding/sdmProj2/source/HealthIssue.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/saszombie/Coding/sdmProj/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/PatientData.dir/source/HealthIssue.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/PatientData.dir/source/HealthIssue.cpp.o -MF CMakeFiles/PatientData.dir/source/HealthIssue.cpp.o.d -o CMakeFiles/PatientData.dir/source/HealthIssue.cpp.o -c /home/saszombie/Coding/sdmProj/source/HealthIssue.cpp
 
 CMakeFiles/PatientData.dir/source/HealthIssue.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/PatientData.dir/source/HealthIssue.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/saszombie/Coding/sdmProj2/source/HealthIssue.cpp > CMakeFiles/PatientData.dir/source/HealthIssue.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/saszombie/Coding/sdmProj/source/HealthIssue.cpp > CMakeFiles/PatientData.dir/source/HealthIssue.cpp.i
 
 CMakeFiles/PatientData.dir/source/HealthIssue.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/PatientData.dir/source/HealthIssue.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/saszombie/Coding/sdmProj2/source/HealthIssue.cpp -o CMakeFiles/PatientData.dir/source/HealthIssue.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/saszombie/Coding/sdmProj/source/HealthIssue.cpp -o CMakeFiles/PatientData.dir/source/HealthIssue.cpp.s
 
 CMakeFiles/PatientData.dir/source/HealthServicies.cpp.o: CMakeFiles/PatientData.dir/flags.make
 CMakeFiles/PatientData.dir/source/HealthServicies.cpp.o: source/HealthServicies.cpp
 CMakeFiles/PatientData.dir/source/HealthServicies.cpp.o: CMakeFiles/PatientData.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/saszombie/Coding/sdmProj2/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/PatientData.dir/source/HealthServicies.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/PatientData.dir/source/HealthServicies.cpp.o -MF CMakeFiles/PatientData.dir/source/HealthServicies.cpp.o.d -o CMakeFiles/PatientData.dir/source/HealthServicies.cpp.o -c /home/saszombie/Coding/sdmProj2/source/HealthServicies.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/saszombie/Coding/sdmProj/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/PatientData.dir/source/HealthServicies.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/PatientData.dir/source/HealthServicies.cpp.o -MF CMakeFiles/PatientData.dir/source/HealthServicies.cpp.o.d -o CMakeFiles/PatientData.dir/source/HealthServicies.cpp.o -c /home/saszombie/Coding/sdmProj/source/HealthServicies.cpp
 
 CMakeFiles/PatientData.dir/source/HealthServicies.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/PatientData.dir/source/HealthServicies.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/saszombie/Coding/sdmProj2/source/HealthServicies.cpp > CMakeFiles/PatientData.dir/source/HealthServicies.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/saszombie/Coding/sdmProj/source/HealthServicies.cpp > CMakeFiles/PatientData.dir/source/HealthServicies.cpp.i
 
 CMakeFiles/PatientData.dir/source/HealthServicies.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/PatientData.dir/source/HealthServicies.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/saszombie/Coding/sdmProj2/source/HealthServicies.cpp -o CMakeFiles/PatientData.dir/source/HealthServicies.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/saszombie/Coding/sdmProj/source/HealthServicies.cpp -o CMakeFiles/PatientData.dir/source/HealthServicies.cpp.s
 
 CMakeFiles/PatientData.dir/source/MainSystem.cpp.o: CMakeFiles/PatientData.dir/flags.make
 CMakeFiles/PatientData.dir/source/MainSystem.cpp.o: source/MainSystem.cpp
 CMakeFiles/PatientData.dir/source/MainSystem.cpp.o: CMakeFiles/PatientData.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/saszombie/Coding/sdmProj2/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/PatientData.dir/source/MainSystem.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/PatientData.dir/source/MainSystem.cpp.o -MF CMakeFiles/PatientData.dir/source/MainSystem.cpp.o.d -o CMakeFiles/PatientData.dir/source/MainSystem.cpp.o -c /home/saszombie/Coding/sdmProj2/source/MainSystem.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/saszombie/Coding/sdmProj/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/PatientData.dir/source/MainSystem.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/PatientData.dir/source/MainSystem.cpp.o -MF CMakeFiles/PatientData.dir/source/MainSystem.cpp.o.d -o CMakeFiles/PatientData.dir/source/MainSystem.cpp.o -c /home/saszombie/Coding/sdmProj/source/MainSystem.cpp
 
 CMakeFiles/PatientData.dir/source/MainSystem.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/PatientData.dir/source/MainSystem.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/saszombie/Coding/sdmProj2/source/MainSystem.cpp > CMakeFiles/PatientData.dir/source/MainSystem.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/saszombie/Coding/sdmProj/source/MainSystem.cpp > CMakeFiles/PatientData.dir/source/MainSystem.cpp.i
 
 CMakeFiles/PatientData.dir/source/MainSystem.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/PatientData.dir/source/MainSystem.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/saszombie/Coding/sdmProj2/source/MainSystem.cpp -o CMakeFiles/PatientData.dir/source/MainSystem.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/saszombie/Coding/sdmProj/source/MainSystem.cpp -o CMakeFiles/PatientData.dir/source/MainSystem.cpp.s
 
 CMakeFiles/PatientData.dir/source/MedicalEncounter.cpp.o: CMakeFiles/PatientData.dir/flags.make
 CMakeFiles/PatientData.dir/source/MedicalEncounter.cpp.o: source/MedicalEncounter.cpp
 CMakeFiles/PatientData.dir/source/MedicalEncounter.cpp.o: CMakeFiles/PatientData.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/saszombie/Coding/sdmProj2/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/PatientData.dir/source/MedicalEncounter.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/PatientData.dir/source/MedicalEncounter.cpp.o -MF CMakeFiles/PatientData.dir/source/MedicalEncounter.cpp.o.d -o CMakeFiles/PatientData.dir/source/MedicalEncounter.cpp.o -c /home/saszombie/Coding/sdmProj2/source/MedicalEncounter.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/saszombie/Coding/sdmProj/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/PatientData.dir/source/MedicalEncounter.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/PatientData.dir/source/MedicalEncounter.cpp.o -MF CMakeFiles/PatientData.dir/source/MedicalEncounter.cpp.o.d -o CMakeFiles/PatientData.dir/source/MedicalEncounter.cpp.o -c /home/saszombie/Coding/sdmProj/source/MedicalEncounter.cpp
 
 CMakeFiles/PatientData.dir/source/MedicalEncounter.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/PatientData.dir/source/MedicalEncounter.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/saszombie/Coding/sdmProj2/source/MedicalEncounter.cpp > CMakeFiles/PatientData.dir/source/MedicalEncounter.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/saszombie/Coding/sdmProj/source/MedicalEncounter.cpp > CMakeFiles/PatientData.dir/source/MedicalEncounter.cpp.i
 
 CMakeFiles/PatientData.dir/source/MedicalEncounter.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/PatientData.dir/source/MedicalEncounter.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/saszombie/Coding/sdmProj2/source/MedicalEncounter.cpp -o CMakeFiles/PatientData.dir/source/MedicalEncounter.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/saszombie/Coding/sdmProj/source/MedicalEncounter.cpp -o CMakeFiles/PatientData.dir/source/MedicalEncounter.cpp.s
 
 CMakeFiles/PatientData.dir/source/Patient.cpp.o: CMakeFiles/PatientData.dir/flags.make
 CMakeFiles/PatientData.dir/source/Patient.cpp.o: source/Patient.cpp
 CMakeFiles/PatientData.dir/source/Patient.cpp.o: CMakeFiles/PatientData.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/saszombie/Coding/sdmProj2/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/PatientData.dir/source/Patient.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/PatientData.dir/source/Patient.cpp.o -MF CMakeFiles/PatientData.dir/source/Patient.cpp.o.d -o CMakeFiles/PatientData.dir/source/Patient.cpp.o -c /home/saszombie/Coding/sdmProj2/source/Patient.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/saszombie/Coding/sdmProj/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/PatientData.dir/source/Patient.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/PatientData.dir/source/Patient.cpp.o -MF CMakeFiles/PatientData.dir/source/Patient.cpp.o.d -o CMakeFiles/PatientData.dir/source/Patient.cpp.o -c /home/saszombie/Coding/sdmProj/source/Patient.cpp
 
 CMakeFiles/PatientData.dir/source/Patient.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/PatientData.dir/source/Patient.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/saszombie/Coding/sdmProj2/source/Patient.cpp > CMakeFiles/PatientData.dir/source/Patient.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/saszombie/Coding/sdmProj/source/Patient.cpp > CMakeFiles/PatientData.dir/source/Patient.cpp.i
 
 CMakeFiles/PatientData.dir/source/Patient.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/PatientData.dir/source/Patient.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/saszombie/Coding/sdmProj2/source/Patient.cpp -o CMakeFiles/PatientData.dir/source/Patient.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/saszombie/Coding/sdmProj/source/Patient.cpp -o CMakeFiles/PatientData.dir/source/Patient.cpp.s
 
 CMakeFiles/PatientData.dir/source/UI.cpp.o: CMakeFiles/PatientData.dir/flags.make
 CMakeFiles/PatientData.dir/source/UI.cpp.o: source/UI.cpp
 CMakeFiles/PatientData.dir/source/UI.cpp.o: CMakeFiles/PatientData.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/saszombie/Coding/sdmProj2/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/PatientData.dir/source/UI.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/PatientData.dir/source/UI.cpp.o -MF CMakeFiles/PatientData.dir/source/UI.cpp.o.d -o CMakeFiles/PatientData.dir/source/UI.cpp.o -c /home/saszombie/Coding/sdmProj2/source/UI.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/saszombie/Coding/sdmProj/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/PatientData.dir/source/UI.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/PatientData.dir/source/UI.cpp.o -MF CMakeFiles/PatientData.dir/source/UI.cpp.o.d -o CMakeFiles/PatientData.dir/source/UI.cpp.o -c /home/saszombie/Coding/sdmProj/source/UI.cpp
 
 CMakeFiles/PatientData.dir/source/UI.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/PatientData.dir/source/UI.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/saszombie/Coding/sdmProj2/source/UI.cpp > CMakeFiles/PatientData.dir/source/UI.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/saszombie/Coding/sdmProj/source/UI.cpp > CMakeFiles/PatientData.dir/source/UI.cpp.i
 
 CMakeFiles/PatientData.dir/source/UI.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/PatientData.dir/source/UI.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/saszombie/Coding/sdmProj2/source/UI.cpp -o CMakeFiles/PatientData.dir/source/UI.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/saszombie/Coding/sdmProj/source/UI.cpp -o CMakeFiles/PatientData.dir/source/UI.cpp.s
 
 # Object files for target PatientData
 PatientData_OBJECTS = \
@@ -221,7 +221,7 @@ build/PatientData: CMakeFiles/PatientData.dir/source/Patient.cpp.o
 build/PatientData: CMakeFiles/PatientData.dir/source/UI.cpp.o
 build/PatientData: CMakeFiles/PatientData.dir/build.make
 build/PatientData: CMakeFiles/PatientData.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/saszombie/Coding/sdmProj2/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Linking CXX executable build/PatientData"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/saszombie/Coding/sdmProj/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Linking CXX executable build/PatientData"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/PatientData.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -233,6 +233,6 @@ CMakeFiles/PatientData.dir/clean:
 .PHONY : CMakeFiles/PatientData.dir/clean
 
 CMakeFiles/PatientData.dir/depend:
-	cd /home/saszombie/Coding/sdmProj2 && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/saszombie/Coding/sdmProj2 /home/saszombie/Coding/sdmProj2 /home/saszombie/Coding/sdmProj2 /home/saszombie/Coding/sdmProj2 /home/saszombie/Coding/sdmProj2/CMakeFiles/PatientData.dir/DependInfo.cmake "--color=$(COLOR)"
+	cd /home/saszombie/Coding/sdmProj && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/saszombie/Coding/sdmProj /home/saszombie/Coding/sdmProj /home/saszombie/Coding/sdmProj /home/saszombie/Coding/sdmProj /home/saszombie/Coding/sdmProj/CMakeFiles/PatientData.dir/DependInfo.cmake "--color=$(COLOR)"
 .PHONY : CMakeFiles/PatientData.dir/depend
 

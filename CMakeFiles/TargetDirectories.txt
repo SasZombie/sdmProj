@@ -1,4 +1,4 @@
-/home/saszombie/Coding/sdmProj2/CMakeFiles/main.dir
-/home/saszombie/Coding/sdmProj2/CMakeFiles/PatientData.dir
-/home/saszombie/Coding/sdmProj2/CMakeFiles/edit_cache.dir
-/home/saszombie/Coding/sdmProj2/CMakeFiles/rebuild_cache.dir
+/home/saszombie/Coding/sdmProj/CMakeFiles/main.dir
+/home/saszombie/Coding/sdmProj/CMakeFiles/PatientData.dir
+/home/saszombie/Coding/sdmProj/CMakeFiles/edit_cache.dir
+/home/saszombie/Coding/sdmProj/CMakeFiles/rebuild_cache.dir
